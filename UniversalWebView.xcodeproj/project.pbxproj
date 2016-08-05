@@ -11,23 +11,23 @@
 		3F9696EB1B3455A200CDD77A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9696EA1B3455A200CDD77A /* ViewController.swift */; };
 		3F9696EE1B3455A200CDD77A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9696EC1B3455A200CDD77A /* Main.storyboard */; };
 		3F9696F01B3455A200CDD77A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F9696EF1B3455A200CDD77A /* Images.xcassets */; };
-		3F9696F31B3455A200CDD77A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9696F11B3455A200CDD77A /* LaunchScreen.xib */; };
 		437E789CD8C5F604158EC122 /* Pods_UniversalWebview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843284C79B12E02D2CE5C945 /* Pods_UniversalWebview.framework */; };
-		CD5210391D549A6900EF3FC0 /* WebView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5210381D549A6900EF3FC0 /* WebView.plist */; };
+		CD17BC951D54A72F0069DD6C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD17BC941D54A72F0069DD6C /* GoogleService-Info.plist */; };
+		CD5210391D549A6900EF3FC0 /* UniversalWebView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5210381D549A6900EF3FC0 /* UniversalWebView.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		139EF17AA172F02B06D90D7A /* Pods-UniversalWebview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebview.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview.debug.xcconfig"; sourceTree = "<group>"; };
-		3F9696E31B3455A200CDD77A /* UniversalWebview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalWebview.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F9696E31B3455A200CDD77A /* UniversalWebView.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalWebView.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9696E71B3455A200CDD77A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F9696E81B3455A200CDD77A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F9696EA1B3455A200CDD77A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3F9696ED1B3455A200CDD77A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F9696EF1B3455A200CDD77A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3F9696F21B3455A200CDD77A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		843284C79B12E02D2CE5C945 /* Pods_UniversalWebview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalWebview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4798AA4DD2A00F72B2A6D6 /* Pods-UniversalWebview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebview.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview.release.xcconfig"; sourceTree = "<group>"; };
-		CD5210381D549A6900EF3FC0 /* WebView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WebView.plist; sourceTree = "<group>"; };
+		CD17BC941D54A72F0069DD6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CD5210381D549A6900EF3FC0 /* UniversalWebView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UniversalWebView.plist; path = UniversalWebview/UniversalWebView.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,8 @@
 		3F9696DA1B3455A200CDD77A = {
 			isa = PBXGroup;
 			children = (
-				3F9696E51B3455A200CDD77A /* UniversalWebview */,
+				CD5210381D549A6900EF3FC0 /* UniversalWebView.plist */,
+				3F9696E51B3455A200CDD77A /* UniversalWebView */,
 				3F9696E41B3455A200CDD77A /* Products */,
 				13D1A278F539996704D02EE3 /* Pods */,
 				0D0B963204ADCD30E4A76320 /* Frameworks */,
@@ -72,28 +73,27 @@
 		3F9696E41B3455A200CDD77A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3F9696E31B3455A200CDD77A /* UniversalWebview.app */,
+				3F9696E31B3455A200CDD77A /* UniversalWebView.temp_caseinsensitive_rename.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3F9696E51B3455A200CDD77A /* UniversalWebview */ = {
+		3F9696E51B3455A200CDD77A /* UniversalWebView */ = {
 			isa = PBXGroup;
 			children = (
-				CD5210381D549A6900EF3FC0 /* WebView.plist */,
 				3F9696E81B3455A200CDD77A /* AppDelegate.swift */,
 				3F9696EA1B3455A200CDD77A /* ViewController.swift */,
 				3F9696EC1B3455A200CDD77A /* Main.storyboard */,
 				3F9696EF1B3455A200CDD77A /* Images.xcassets */,
-				3F9696F11B3455A200CDD77A /* LaunchScreen.xib */,
 				3F9696E61B3455A200CDD77A /* Supporting Files */,
 			);
-			path = UniversalWebview;
+			path = UniversalWebView;
 			sourceTree = "<group>";
 		};
 		3F9696E61B3455A200CDD77A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CD17BC941D54A72F0069DD6C /* GoogleService-Info.plist */,
 				3F9696E71B3455A200CDD77A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -119,7 +119,7 @@
 			);
 			name = UniversalWebview;
 			productName = "Simple Universal Webview App";
-			productReference = 3F9696E31B3455A200CDD77A /* UniversalWebview.app */;
+			productReference = 3F9696E31B3455A200CDD77A /* UniversalWebView.temp_caseinsensitive_rename.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -134,10 +134,11 @@
 				TargetAttributes = {
 					3F9696E21B3455A200CDD77A = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 56XX2LQCB2;
 					};
 				};
 			};
-			buildConfigurationList = 3F9696DE1B3455A200CDD77A /* Build configuration list for PBXProject "UniversalWebview" */;
+			buildConfigurationList = 3F9696DE1B3455A200CDD77A /* Build configuration list for PBXProject "UniversalWebView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -161,8 +162,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F9696EE1B3455A200CDD77A /* Main.storyboard in Resources */,
-				3F9696F31B3455A200CDD77A /* LaunchScreen.xib in Resources */,
-				CD5210391D549A6900EF3FC0 /* WebView.plist in Resources */,
+				CD17BC951D54A72F0069DD6C /* GoogleService-Info.plist in Resources */,
+				CD5210391D549A6900EF3FC0 /* UniversalWebView.plist in Resources */,
 				3F9696F01B3455A200CDD77A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,14 +237,6 @@
 				3F9696ED1B3455A200CDD77A /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3F9696F11B3455A200CDD77A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F9696F21B3455A200CDD77A /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -338,10 +331,11 @@
 			baseConfigurationReference = 139EF17AA172F02B06D90D7A /* Pods-UniversalWebview.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = UniversalWebview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.freeman.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = UniversalWebview;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.universalwebapp;
+				PRODUCT_NAME = UniversalWebView.temp_caseinsensitive_rename;
 			};
 			name = Debug;
 		};
@@ -350,17 +344,18 @@
 			baseConfigurationReference = 9B4798AA4DD2A00F72B2A6D6 /* Pods-UniversalWebview.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = UniversalWebview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.freeman.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = UniversalWebview;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.universalwebapp;
+				PRODUCT_NAME = UniversalWebView.temp_caseinsensitive_rename;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3F9696DE1B3455A200CDD77A /* Build configuration list for PBXProject "UniversalWebview" */ = {
+		3F9696DE1B3455A200CDD77A /* Build configuration list for PBXProject "UniversalWebView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3F9697001B3455A200CDD77A /* Debug */,
