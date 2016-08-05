@@ -8,16 +8,22 @@
 
 import UIKit
 import WebKit
+import MBProgressHUD
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDelegate {
     
     var wkWebView: WKWebView?
     var uiWebView: UIWebView?
+    var load : MBProgressHUD = MBProgressHUD()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-
+        
+        load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        load.mode = MBProgressHUDMode.Indeterminate
+        load.label.text = "Loading";
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
         let data = NSArray(contentsOfFile: dataPath()) as? [String]
         let url = NSURL(string: data![0])
         print(url!)
@@ -27,8 +33,16 @@ class ViewController: UIViewController {
         
         self.wkWebView = WKWebView(frame: UIScreen.mainScreen().bounds)
         self.wkWebView?.loadRequest(requestObj)
-        self.view.addSubview(self.wkWebView!)
+        self.wkWebView?.navigationDelegate = self
 
+    }
+    
+    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+        print("WebView content loaded.")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.load.hideAnimated(true)
+            self.view.addSubview(self.wkWebView!)
+        }
     }
     
     func dataPath() -> String {

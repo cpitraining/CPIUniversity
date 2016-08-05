@@ -12,10 +12,12 @@
 		3F9696EE1B3455A200CDD77A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9696EC1B3455A200CDD77A /* Main.storyboard */; };
 		3F9696F01B3455A200CDD77A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F9696EF1B3455A200CDD77A /* Images.xcassets */; };
 		3F9696F31B3455A200CDD77A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9696F11B3455A200CDD77A /* LaunchScreen.xib */; };
+		437E789CD8C5F604158EC122 /* Pods_UniversalWebview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843284C79B12E02D2CE5C945 /* Pods_UniversalWebview.framework */; };
 		CD5210391D549A6900EF3FC0 /* WebView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5210381D549A6900EF3FC0 /* WebView.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		139EF17AA172F02B06D90D7A /* Pods-UniversalWebview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebview.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview.debug.xcconfig"; sourceTree = "<group>"; };
 		3F9696E31B3455A200CDD77A /* UniversalWebview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalWebview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9696E71B3455A200CDD77A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F9696E81B3455A200CDD77A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -23,6 +25,8 @@
 		3F9696ED1B3455A200CDD77A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F9696EF1B3455A200CDD77A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3F9696F21B3455A200CDD77A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		843284C79B12E02D2CE5C945 /* Pods_UniversalWebview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalWebview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B4798AA4DD2A00F72B2A6D6 /* Pods-UniversalWebview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebview.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview.release.xcconfig"; sourceTree = "<group>"; };
 		CD5210381D549A6900EF3FC0 /* WebView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WebView.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -31,17 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				437E789CD8C5F604158EC122 /* Pods_UniversalWebview.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D0B963204ADCD30E4A76320 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				843284C79B12E02D2CE5C945 /* Pods_UniversalWebview.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		13D1A278F539996704D02EE3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				139EF17AA172F02B06D90D7A /* Pods-UniversalWebview.debug.xcconfig */,
+				9B4798AA4DD2A00F72B2A6D6 /* Pods-UniversalWebview.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3F9696DA1B3455A200CDD77A = {
 			isa = PBXGroup;
 			children = (
 				3F9696E51B3455A200CDD77A /* UniversalWebview */,
 				3F9696E41B3455A200CDD77A /* Products */,
+				13D1A278F539996704D02EE3 /* Pods */,
+				0D0B963204ADCD30E4A76320 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,9 +106,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3F9697021B3455A200CDD77A /* Build configuration list for PBXNativeTarget "UniversalWebview" */;
 			buildPhases = (
+				268C745AF89AB4D9043D96A8 /* [CP] Check Pods Manifest.lock */,
 				3F9696DF1B3455A200CDD77A /* Sources */,
 				3F9696E01B3455A200CDD77A /* Frameworks */,
 				3F9696E11B3455A200CDD77A /* Resources */,
+				F261ECE49A969358AA4316C7 /* [CP] Embed Pods Frameworks */,
+				DE20F61C3CCA3B981CB902C6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -141,6 +168,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		268C745AF89AB4D9043D96A8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DE20F61C3CCA3B981CB902C6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F261ECE49A969358AA4316C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3F9696DF1B3455A200CDD77A /* Sources */ = {
@@ -260,6 +335,7 @@
 		};
 		3F9697031B3455A200CDD77A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 139EF17AA172F02B06D90D7A /* Pods-UniversalWebview.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = UniversalWebview/Info.plist;
@@ -271,6 +347,7 @@
 		};
 		3F9697041B3455A200CDD77A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B4798AA4DD2A00F72B2A6D6 /* Pods-UniversalWebview.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = UniversalWebview/Info.plist;
