@@ -79,6 +79,9 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
             bannerView.delegate = self
         } else {
             bannerView.hidden = true
+            let bounds = UIScreen.mainScreen().bounds
+            let frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+            self.wkWebView = WKWebView(frame: frame)
         }
     }
     

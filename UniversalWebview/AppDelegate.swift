@@ -15,20 +15,31 @@ import FirebaseInstanceID
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var googlePlistExists = false
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+
+        
+        if NSBundle.mainBundle().pathForResource("GoogleService-Info", ofType: "plist") != nil {
+            googlePlistExists = true
+        }
+
         let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
-        UIApplication.sharedApplication().registerForRemoteNotifications()
-
-        FIRApp.configure()
-
-        // Add observer for InstanceID token refresh callback.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         
+        if googlePlistExists == true {
+            UIApplication.sharedApplication().registerForRemoteNotifications()
+            
+            FIRApp.configure()
+            
+            // Add observer for InstanceID token refresh callback.
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+        }
         return true
     }
     
@@ -67,8 +78,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(application: UIApplication) {
-        FIRMessaging.messaging().disconnect()
-        print("Disconnected from FCM.")
+        if googlePlistExists == true {
+            FIRMessaging.messaging().disconnect()
+            print("Disconnected from FCM.")
+        }
     }
 
 }
