@@ -10,7 +10,6 @@
 		C63DB714F099553E014BB5E6 /* Pods_UniversalWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */; };
 		CD6A99E11D5B1BAA00E25A08 /* UniversalWebView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */; };
 		CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */; };
-		CD6A99EC1D5B1C1800E25A08 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99EB1D5B1C1800E25A08 /* Info.plist */; };
 		CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */; };
 		CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */; };
 		CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99F51D5B1E3500E25A08 /* Main.storyboard */; };
@@ -152,7 +151,6 @@
 			files = (
 				CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */,
 				CD6A99E11D5B1BAA00E25A08 /* UniversalWebView.plist in Resources */,
-				CD6A99EC1D5B1C1800E25A08 /* Info.plist in Resources */,
 				CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
