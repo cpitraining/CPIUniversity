@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F9696E21B3455A200CDD77A"
-               BuildableName = "Universal Web View.temp_caseinsensitive_rename.app"
+               BlueprintIdentifier = "CD6A99CA1D5B1B8600E25A08"
+               BuildableName = "UniversalWebView.app"
                BlueprintName = "UniversalWebView"
                ReferencedContainer = "container:UniversalWebView.xcodeproj">
             </BuildableReference>
@@ -32,8 +32,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F9696E21B3455A200CDD77A"
-            BuildableName = "Universal Web View.temp_caseinsensitive_rename.app"
+            BlueprintIdentifier = "CD6A99CA1D5B1B8600E25A08"
+            BuildableName = "UniversalWebView.app"
             BlueprintName = "UniversalWebView"
             ReferencedContainer = "container:UniversalWebView.xcodeproj">
          </BuildableReference>
@@ -55,8 +55,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F9696E21B3455A200CDD77A"
-            BuildableName = "Universal Web View.temp_caseinsensitive_rename.app"
+            BlueprintIdentifier = "CD6A99CA1D5B1B8600E25A08"
+            BuildableName = "UniversalWebView.app"
             BlueprintName = "UniversalWebView"
             ReferencedContainer = "container:UniversalWebView.xcodeproj">
          </BuildableReference>
@@ -74,8 +74,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3F9696E21B3455A200CDD77A"
-            BuildableName = "Universal Web View.temp_caseinsensitive_rename.app"
+            BlueprintIdentifier = "CD6A99CA1D5B1B8600E25A08"
+            BuildableName = "UniversalWebView.app"
             BlueprintName = "UniversalWebView"
             ReferencedContainer = "container:UniversalWebView.xcodeproj">
          </BuildableReference>

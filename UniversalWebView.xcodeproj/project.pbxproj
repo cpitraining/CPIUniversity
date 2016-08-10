@@ -7,140 +7,127 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F9696E91B3455A200CDD77A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9696E81B3455A200CDD77A /* AppDelegate.swift */; };
-		3F9696EB1B3455A200CDD77A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9696EA1B3455A200CDD77A /* ViewController.swift */; };
-		3F9696EE1B3455A200CDD77A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F9696EC1B3455A200CDD77A /* Main.storyboard */; };
-		3F9696F01B3455A200CDD77A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F9696EF1B3455A200CDD77A /* Images.xcassets */; };
-		437E789CD8C5F604158EC122 /* Pods_UniversalWebview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843284C79B12E02D2CE5C945 /* Pods_UniversalWebview.framework */; };
-		CD5210391D549A6900EF3FC0 /* UniversalWebView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD5210381D549A6900EF3FC0 /* UniversalWebView.plist */; };
+		C63DB714F099553E014BB5E6 /* Pods_UniversalWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */; };
+		CD6A99E11D5B1BAA00E25A08 /* UniversalWebView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */; };
+		CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */; };
+		CD6A99EC1D5B1C1800E25A08 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99EB1D5B1C1800E25A08 /* Info.plist */; };
+		CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */; };
+		CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */; };
+		CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99F51D5B1E3500E25A08 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		139EF17AA172F02B06D90D7A /* Pods-UniversalWebview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebview.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview.debug.xcconfig"; sourceTree = "<group>"; };
-		3F9696E31B3455A200CDD77A /* UniversalWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F9696E71B3455A200CDD77A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F9696E81B3455A200CDD77A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3F9696EA1B3455A200CDD77A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3F9696ED1B3455A200CDD77A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3F9696EF1B3455A200CDD77A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		843284C79B12E02D2CE5C945 /* Pods_UniversalWebview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalWebview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B4798AA4DD2A00F72B2A6D6 /* Pods-UniversalWebview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebview.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview.release.xcconfig"; sourceTree = "<group>"; };
-		CD5210381D549A6900EF3FC0 /* UniversalWebView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UniversalWebView.plist; path = UniversalWebview/UniversalWebView.plist; sourceTree = "<group>"; };
+		5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalWebView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.debug.xcconfig"; sourceTree = "<group>"; };
+		98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebView.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.release.xcconfig"; sourceTree = "<group>"; };
+		CD6A99CB1D5B1B8600E25A08 /* UniversalWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UniversalWebView.plist; path = UniversalWebView/UniversalWebView.plist; sourceTree = "<group>"; };
+		CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CD6A99EB1D5B1C1800E25A08 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CD6A99F51D5B1E3500E25A08 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3F9696E01B3455A200CDD77A /* Frameworks */ = {
+		CD6A99C81D5B1B8600E25A08 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				437E789CD8C5F604158EC122 /* Pods_UniversalWebview.framework in Frameworks */,
+				C63DB714F099553E014BB5E6 /* Pods_UniversalWebView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0D0B963204ADCD30E4A76320 /* Frameworks */ = {
+		53BAC04DEB3107035ECE5DA7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				843284C79B12E02D2CE5C945 /* Pods_UniversalWebview.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		13D1A278F539996704D02EE3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				139EF17AA172F02B06D90D7A /* Pods-UniversalWebview.debug.xcconfig */,
-				9B4798AA4DD2A00F72B2A6D6 /* Pods-UniversalWebview.release.xcconfig */,
+				7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */,
+				98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		3F9696DA1B3455A200CDD77A = {
+		6E4D7A0EBC02878DD491126D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CD5210381D549A6900EF3FC0 /* UniversalWebView.plist */,
-				3F9696E51B3455A200CDD77A /* UniversalWebView */,
-				3F9696E41B3455A200CDD77A /* Products */,
-				13D1A278F539996704D02EE3 /* Pods */,
-				0D0B963204ADCD30E4A76320 /* Frameworks */,
+				5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD6A99C21D5B1B8600E25A08 = {
+			isa = PBXGroup;
+			children = (
+				CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */,
+				CD6A99CD1D5B1B8600E25A08 /* UniversalWebView */,
+				CD6A99CC1D5B1B8600E25A08 /* Products */,
+				53BAC04DEB3107035ECE5DA7 /* Pods */,
+				6E4D7A0EBC02878DD491126D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		3F9696E41B3455A200CDD77A /* Products */ = {
+		CD6A99CC1D5B1B8600E25A08 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3F9696E31B3455A200CDD77A /* UniversalWebView.app */,
+				CD6A99CB1D5B1B8600E25A08 /* UniversalWebView.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3F9696E51B3455A200CDD77A /* UniversalWebView */ = {
+		CD6A99CD1D5B1B8600E25A08 /* UniversalWebView */ = {
 			isa = PBXGroup;
 			children = (
-				3F9696E81B3455A200CDD77A /* AppDelegate.swift */,
-				3F9696EA1B3455A200CDD77A /* ViewController.swift */,
-				3F9696EC1B3455A200CDD77A /* Main.storyboard */,
-				3F9696EF1B3455A200CDD77A /* Images.xcassets */,
-				3F9696E61B3455A200CDD77A /* Supporting Files */,
+				CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */,
+				CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */,
+				CD6A99F51D5B1E3500E25A08 /* Main.storyboard */,
+				CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */,
+				CD6A99EB1D5B1C1800E25A08 /* Info.plist */,
 			);
 			path = UniversalWebView;
-			sourceTree = "<group>";
-		};
-		3F9696E61B3455A200CDD77A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3F9696E71B3455A200CDD77A /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3F9696E21B3455A200CDD77A /* UniversalWebView */ = {
+		CD6A99CA1D5B1B8600E25A08 /* UniversalWebView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3F9697021B3455A200CDD77A /* Build configuration list for PBXNativeTarget "UniversalWebView" */;
+			buildConfigurationList = CD6A99DD1D5B1B8600E25A08 /* Build configuration list for PBXNativeTarget "UniversalWebView" */;
 			buildPhases = (
-				268C745AF89AB4D9043D96A8 /* [CP] Check Pods Manifest.lock */,
-				3F9696DF1B3455A200CDD77A /* Sources */,
-				3F9696E01B3455A200CDD77A /* Frameworks */,
-				3F9696E11B3455A200CDD77A /* Resources */,
-				F261ECE49A969358AA4316C7 /* [CP] Embed Pods Frameworks */,
-				DE20F61C3CCA3B981CB902C6 /* [CP] Copy Pods Resources */,
+				1698D11F799CB576D5539D0A /* [CP] Check Pods Manifest.lock */,
+				CD6A99C71D5B1B8600E25A08 /* Sources */,
+				CD6A99C81D5B1B8600E25A08 /* Frameworks */,
+				CD6A99C91D5B1B8600E25A08 /* Resources */,
+				DB65B082F3B06527E81C52ED /* [CP] Embed Pods Frameworks */,
+				EB6C43668B1D0879C7DAE97C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = UniversalWebView;
-			productName = "Simple Universal Webview App";
-			productReference = 3F9696E31B3455A200CDD77A /* UniversalWebView.app */;
+			productName = UniversalWebView;
+			productReference = CD6A99CB1D5B1B8600E25A08 /* UniversalWebView.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3F9696DB1B3455A200CDD77A /* Project object */ = {
+		CD6A99C31D5B1B8600E25A08 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Brommko LLC";
 				TargetAttributes = {
-					3F9696E21B3455A200CDD77A = {
-						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = 4QL84KPYN7;
-						SystemCapabilities = {
-							com.apple.BackgroundModes = {
-								enabled = 1;
-							};
-						};
+					CD6A99CA1D5B1B8600E25A08 = {
+						CreatedOnToolsVersion = 7.3;
 					};
 				};
 			};
-			buildConfigurationList = 3F9696DE1B3455A200CDD77A /* Build configuration list for PBXProject "UniversalWebView" */;
+			buildConfigurationList = CD6A99C61D5B1B8600E25A08 /* Build configuration list for PBXProject "UniversalWebView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -148,31 +135,32 @@
 				en,
 				Base,
 			);
-			mainGroup = 3F9696DA1B3455A200CDD77A;
-			productRefGroup = 3F9696E41B3455A200CDD77A /* Products */;
+			mainGroup = CD6A99C21D5B1B8600E25A08;
+			productRefGroup = CD6A99CC1D5B1B8600E25A08 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3F9696E21B3455A200CDD77A /* UniversalWebView */,
+				CD6A99CA1D5B1B8600E25A08 /* UniversalWebView */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3F9696E11B3455A200CDD77A /* Resources */ = {
+		CD6A99C91D5B1B8600E25A08 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F9696EE1B3455A200CDD77A /* Main.storyboard in Resources */,
-				CD5210391D549A6900EF3FC0 /* UniversalWebView.plist in Resources */,
-				3F9696F01B3455A200CDD77A /* Images.xcassets in Resources */,
+				CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */,
+				CD6A99E11D5B1BAA00E25A08 /* UniversalWebView.plist in Resources */,
+				CD6A99EC1D5B1C1800E25A08 /* Info.plist in Resources */,
+				CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		268C745AF89AB4D9043D96A8 /* [CP] Check Pods Manifest.lock */ = {
+		1698D11F799CB576D5539D0A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -187,22 +175,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		DE20F61C3CCA3B981CB902C6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F261ECE49A969358AA4316C7 /* [CP] Embed Pods Frameworks */ = {
+		DB65B082F3B06527E81C52ED /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -214,39 +187,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebview/Pods-UniversalWebview-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB6C43668B1D0879C7DAE97C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3F9696DF1B3455A200CDD77A /* Sources */ = {
+		CD6A99C71D5B1B8600E25A08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F9696EB1B3455A200CDD77A /* ViewController.swift in Sources */,
-				3F9696E91B3455A200CDD77A /* AppDelegate.swift in Sources */,
+				CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */,
+				CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		3F9696EC1B3455A200CDD77A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F9696ED1B3455A200CDD77A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		3F9697001B3455A200CDD77A /* Debug */ = {
+		CD6A99DB1D5B1B8600E25A08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -262,7 +240,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -273,14 +251,13 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -289,10 +266,11 @@
 			};
 			name = Debug;
 		};
-		3F9697011B3455A200CDD77A /* Release */ = {
+		CD6A99DC1D5B1B8600E25A08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -319,7 +297,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -327,58 +305,52 @@
 			};
 			name = Release;
 		};
-		3F9697031B3455A200CDD77A /* Debug */ = {
+		CD6A99DE1D5B1B8600E25A08 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 139EF17AA172F02B06D90D7A /* Pods-UniversalWebview.debug.xcconfig */;
+			baseConfigurationReference = 7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = UniversalWebview/Info.plist;
+				INFOPLIST_FILE = UniversalWebView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.universalwebapp;
-				PRODUCT_NAME = UniversalWebView;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.UniversalWebView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		3F9697041B3455A200CDD77A /* Release */ = {
+		CD6A99DF1D5B1B8600E25A08 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B4798AA4DD2A00F72B2A6D6 /* Pods-UniversalWebview.release.xcconfig */;
+			baseConfigurationReference = 98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = UniversalWebview/Info.plist;
+				INFOPLIST_FILE = UniversalWebView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.universalwebapp;
-				PRODUCT_NAME = UniversalWebView;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.UniversalWebView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3F9696DE1B3455A200CDD77A /* Build configuration list for PBXProject "UniversalWebView" */ = {
+		CD6A99C61D5B1B8600E25A08 /* Build configuration list for PBXProject "UniversalWebView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F9697001B3455A200CDD77A /* Debug */,
-				3F9697011B3455A200CDD77A /* Release */,
+				CD6A99DB1D5B1B8600E25A08 /* Debug */,
+				CD6A99DC1D5B1B8600E25A08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3F9697021B3455A200CDD77A /* Build configuration list for PBXNativeTarget "UniversalWebView" */ = {
+		CD6A99DD1D5B1B8600E25A08 /* Build configuration list for PBXNativeTarget "UniversalWebView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F9697031B3455A200CDD77A /* Debug */,
-				3F9697041B3455A200CDD77A /* Release */,
+				CD6A99DE1D5B1B8600E25A08 /* Debug */,
+				CD6A99DF1D5B1B8600E25A08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 3F9696DB1B3455A200CDD77A /* Project object */;
+	rootObject = CD6A99C31D5B1B8600E25A08 /* Project object */;
 }

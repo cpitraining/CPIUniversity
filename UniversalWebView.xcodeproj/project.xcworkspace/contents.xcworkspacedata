@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/mariokovacevic/Desktop/ios-universal-webview-boilerplate-master/UniversalWebview.xcodeproj">
+      location = "self:UniversalWebView.xcodeproj">
    </FileRef>
 </Workspace>
