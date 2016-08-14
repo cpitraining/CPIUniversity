@@ -10,8 +10,9 @@ import UIKit
 import WebKit
 import MBProgressHUD
 import GoogleMobileAds
+import CoreLocation
 
-class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate  {
+class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate, CLLocationManagerDelegate  {
     
     @IBOutlet var bannerView: GADBannerView!
 
@@ -21,6 +22,8 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
     var interstitial: GADInterstitial!
     let request = GADRequest()
     
+    var manager:CLLocationManager!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +54,15 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
         }
 
         self.loadBannerAd()
+        manager = CLLocationManager()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.startUpdatingLocation()
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("locations = \(locations)")
     }
     
     override func viewDidAppear(animated: Bool) {
