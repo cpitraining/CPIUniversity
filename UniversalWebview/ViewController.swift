@@ -33,7 +33,14 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         let appData = NSDictionary(contentsOfFile: dataPath())
-        let url = NSURL(string: appData?.valueForKey("URL") as! String)
+        let urlString = appData?.valueForKey("URL") as? String
+        
+        let url:NSURL?
+        if urlString != nil {
+            url = NSURL(string: urlString!)
+        } else {
+            url = NSBundle.mainBundle().URLForResource("index", withExtension: "html")!
+        }
         print(url!)
         
         // Create url request

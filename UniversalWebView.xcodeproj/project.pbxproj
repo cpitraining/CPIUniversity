@@ -13,6 +13,7 @@
 		CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */; };
 		CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */; };
 		CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99F51D5B1E3500E25A08 /* Main.storyboard */; };
+		CD71C20C1D62FC0000C5EFFA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = CD71C20B1D62FC0000C5EFFA /* index.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CD6A99F51D5B1E3500E25A08 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CD71C20B1D62FC0000C5EFFA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		CD6A99CD1D5B1B8600E25A08 /* UniversalWebView */ = {
 			isa = PBXGroup;
 			children = (
+				CD71C20A1D62FC0000C5EFFA /* web_content */,
 				CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */,
 				CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */,
 				CD6A99F51D5B1E3500E25A08 /* Main.storyboard */,
@@ -86,6 +89,14 @@
 				CD6A99EB1D5B1C1800E25A08 /* Info.plist */,
 			);
 			path = UniversalWebView;
+			sourceTree = "<group>";
+		};
+		CD71C20A1D62FC0000C5EFFA /* web_content */ = {
+			isa = PBXGroup;
+			children = (
+				CD71C20B1D62FC0000C5EFFA /* index.html */,
+			);
+			path = web_content;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +134,7 @@
 				TargetAttributes = {
 					CD6A99CA1D5B1B8600E25A08 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 4QL84KPYN7;
 					};
 				};
 			};
@@ -150,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */,
+				CD71C20C1D62FC0000C5EFFA /* index.html in Resources */,
 				CD6A99E11D5B1BAA00E25A08 /* UniversalWebView.plist in Resources */,
 				CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */,
 			);
@@ -308,10 +321,13 @@
 			baseConfigurationReference = 7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = UniversalWebView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.UniversalWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -320,10 +336,13 @@
 			baseConfigurationReference = 98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = UniversalWebView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.UniversalWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
