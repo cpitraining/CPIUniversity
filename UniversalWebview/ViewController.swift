@@ -20,7 +20,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     var wkWebView: WKWebView!
     var popWindow:WKWebView?
     
-//    var load : MBProgressHUD = MBProgressHUD()
+    var load : MBProgressHUD = MBProgressHUD()
     
     var interstitial: GADInterstitial!
     let request = GADRequest()
@@ -28,9 +28,9 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-//        load.mode = MBProgressHUDMode.Indeterminate
-//        load.label.text = "Loading";
+        load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        load.mode = MBProgressHUDMode.Indeterminate
+        load.label.text = "Loading";
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
@@ -58,7 +58,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.wkWebView?.loadRequest(requestObj)
         self.wkWebView?.navigationDelegate = self
         self.wkWebView?.UIDelegate = self
-        self.view.addSubview(self.wkWebView!)
+//        self.view.addSubview(self.wkWebView!)
 
         let interstitialId = appData?.valueForKey("AdMobInterstitialUnitId") as? String
         
@@ -105,14 +105,17 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         print("WebView content loaded.")
-//        self.load.hideAnimated(true)
-//        self.view.addSubview(self.wkWebView!)
+        self.load.hideAnimated(true)
         
-//        if self.interstitial != nil && self.interstitial.isReady {
-//            self.interstitial.presentFromRootViewController(self)
-//        } else {
-//            self.loadBannerAd()
-//        }
+        if self.popWindow == nil {
+            self.view.addSubview(self.wkWebView!)
+            
+            if self.interstitial != nil && self.interstitial.isReady {
+                self.interstitial.presentFromRootViewController(self)
+            } else {
+                self.loadBannerAd()
+            }
+        }
     }
     
     func getPopwindow(configuration:WKWebViewConfiguration) -> WKWebView {
@@ -141,7 +144,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         print(#function)
         
         self.popWindow = self.getPopwindow(configuration)
-        self.popWindow!.loadRequest(navigationAction.request)
         self.popWindow?.navigationDelegate = self
         self.popWindow?.UIDelegate = self
         self.view.addSubview(self.popWindow!)
