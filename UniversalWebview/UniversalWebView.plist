@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>OneSignalAppID</key>
+	<string>a1766750-0368-4d24-b589-1f45733df3be</string>
 	<key>URL</key>
 	<string>http://cnn.com</string>
 	<key>AdMobBannerUnitId</key>

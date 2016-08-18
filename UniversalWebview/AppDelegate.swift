@@ -40,6 +40,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Add observer for InstanceID token refresh callback.
             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         }
+        
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if let oneSignalAppID = appData?.valueForKey("OneSignalAppID") as? String {
+            var oneSignal  = OneSignal(launchOptions: launchOptions, appId: oneSignalAppID, handleNotification: nil)
+            OneSignal.defaultClient().enableInAppAlertNotification(true)
+            
+            oneSignal = OneSignal(launchOptions: launchOptions, appId: oneSignalAppID) { (message, additionalData, isActive) in
+                NSLog("OneSignal Notification opened:\nMessage: %@", message)
+                
+                if additionalData != nil {
+                    NSLog("additionalData: %@", additionalData)
+                    // Check for and read any custom values you added to the notification
+                    // This done with the "Additonal Data" section the dashbaord.
+                    // OR setting the 'data' field on our REST API.
+                    if let customKey = additionalData["customKey"] as! String? {
+                        NSLog("customKey: %@", customKey)
+                    }
+                }
+            }
+            
+            oneSignal.IdsAvailable { (userId, pushToken) -> Void in
+                NSLog("OneSignal userId: %@", userId)
+                if pushToken != nil {
+                    NSLog("OneSignal pushToken: %@", pushToken)
+                }
+            }
+        } else {
+            print("OneSignal API Key is not in the plist file!")
+        }
+        
         return true
     }
     
@@ -84,5 +114,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    static func dataPath() -> String {
+        return NSBundle.mainBundle().pathForResource("UniversalWebView", ofType: "plist")!
+    }
 }
 

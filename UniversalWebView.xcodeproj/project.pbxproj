@@ -20,6 +20,7 @@
 		5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalWebView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.debug.xcconfig"; sourceTree = "<group>"; };
 		98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebView.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.release.xcconfig"; sourceTree = "<group>"; };
+		CD27E1DE1D65EFE700EBE817 /* UniversalWebView-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UniversalWebView-Bridging-Header.h"; sourceTree = "<group>"; };
 		CD6A99CB1D5B1B8600E25A08 /* UniversalWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UniversalWebView.plist; path = UniversalWebView/UniversalWebView.plist; sourceTree = "<group>"; };
 		CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 				CD6A99F51D5B1E3500E25A08 /* Main.storyboard */,
 				CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */,
 				CD6A99EB1D5B1C1800E25A08 /* Info.plist */,
+				CD27E1DE1D65EFE700EBE817 /* UniversalWebView-Bridging-Header.h */,
 			);
 			path = UniversalWebView;
 			sourceTree = "<group>";
@@ -134,7 +136,7 @@
 				TargetAttributes = {
 					CD6A99CA1D5B1B8600E25A08 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4QL84KPYN7;
+						DevelopmentTeam = 56XX2LQCB2;
 					};
 				};
 			};
@@ -326,9 +328,10 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = UniversalWebView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.UniversalWebView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bommko.WebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "UniversalWebView/UniversalWebView-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -342,9 +345,10 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = UniversalWebView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.brommko.UniversalWebView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bommko.WebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "UniversalWebView/UniversalWebView-Bridging-Header.h";
 			};
 			name = Release;
 		};

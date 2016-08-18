@@ -10,9 +10,8 @@ import UIKit
 import WebKit
 import MBProgressHUD
 import GoogleMobileAds
-import CoreLocation
 
-class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate, CLLocationManagerDelegate  {
+class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate  {
     
     @IBOutlet var bannerView: GADBannerView!
 
@@ -22,8 +21,6 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
     var interstitial: GADInterstitial!
     let request = GADRequest()
     
-    var manager:CLLocationManager!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +29,7 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
         load.label.text = "Loading";
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        let appData = NSDictionary(contentsOfFile: dataPath())
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         let urlString = appData?.valueForKey("URL") as? String
         
         let url:NSURL?
@@ -61,15 +58,6 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
         }
 
         self.loadBannerAd()
-        manager = CLLocationManager()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.startUpdatingLocation()
-    }
-    
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("locations = \(locations)")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -89,7 +77,7 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
     }
     
     func loadBannerAd(){
-        let appData = NSDictionary(contentsOfFile: dataPath())
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         let bannerId = appData?.valueForKey("AdMobBannerUnitId") as? String
         if bannerId != nil {
             bannerView.adUnitID = bannerId
@@ -114,10 +102,6 @@ class ViewController: UIViewController, WKNavigationDelegate, MBProgressHUDDeleg
         } else {
             self.loadBannerAd()
         }
-    }
-    
-    func dataPath() -> String {
-        return NSBundle.mainBundle().pathForResource("UniversalWebView", ofType: "plist")!
     }
     
     override func didReceiveMemoryWarning() {
