@@ -28,10 +28,9 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        load.mode = MBProgressHUDMode.Indeterminate
-        load.label.text = "Loading";
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        self.load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        self.load.mode = MBProgressHUDMode.Indeterminate
+        self.load.label.text = "Loading";
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         let urlString = appData?.valueForKey("URL") as? String
@@ -58,10 +57,8 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.wkWebView?.loadRequest(requestObj)
         self.wkWebView?.navigationDelegate = self
         self.wkWebView?.UIDelegate = self
-//        self.view.addSubview(self.wkWebView!)
 
         let interstitialId = appData?.valueForKey("AdMobInterstitialUnitId") as? String
-        
         if interstitialId != nil {
             self.interstitial = GADInterstitial(adUnitID: interstitialId!)
             self.interstitial.delegate = self
