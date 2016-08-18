@@ -15,37 +15,36 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     @IBOutlet var bannerView: GADBannerView!
     
+    var mainURL:NSURL!
+    
     var wkWebView: WKWebView!
     var popWindow:WKWebView?
     
-    var load : MBProgressHUD = MBProgressHUD()
+//    var load : MBProgressHUD = MBProgressHUD()
     
     var interstitial: GADInterstitial!
     let request = GADRequest()
     
-    let social = ["facebook.com", "linkedin.com", "google.com"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        load.mode = MBProgressHUDMode.Indeterminate
-        load.label.text = "Loading";
+//        load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+//        load.mode = MBProgressHUDMode.Indeterminate
+//        load.label.text = "Loading";
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         let urlString = appData?.valueForKey("URL") as? String
         
-        let url:NSURL?
         if urlString != nil {
-            url = NSURL(string: urlString!)
+            mainURL = NSURL(string: urlString!)
         } else {
-            url = NSBundle.mainBundle().URLForResource("index", withExtension: "html")!
+            mainURL = NSBundle.mainBundle().URLForResource("index", withExtension: "html")!
         }
-        print(url!)
+        print(mainURL!)
         
         // Create url request
-        let requestObj: NSURLRequest = NSURLRequest(URL: url!);
+        let requestObj: NSURLRequest = NSURLRequest(URL: mainURL!);
         
         let theConfiguration:WKWebViewConfiguration? = WKWebViewConfiguration()
         let thisPref:WKPreferences = WKPreferences()
@@ -58,7 +57,9 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.wkWebView = WKWebView(frame: frame, configuration: theConfiguration!)
         self.wkWebView?.loadRequest(requestObj)
         self.wkWebView?.navigationDelegate = self
-        
+        self.wkWebView?.UIDelegate = self
+        self.view.addSubview(self.wkWebView!)
+
         let interstitialId = appData?.valueForKey("AdMobInterstitialUnitId") as? String
         
         if interstitialId != nil {
@@ -104,17 +105,19 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         print("WebView content loaded.")
-        self.load.hideAnimated(true)
-        self.view.addSubview(self.wkWebView!)
+//        self.load.hideAnimated(true)
+//        self.view.addSubview(self.wkWebView!)
         
-        if self.interstitial != nil && self.interstitial.isReady {
-            self.interstitial.presentFromRootViewController(self)
-        } else {
-            self.loadBannerAd()
-        }
+//        if self.interstitial != nil && self.interstitial.isReady {
+//            self.interstitial.presentFromRootViewController(self)
+//        } else {
+//            self.loadBannerAd()
+//        }
     }
     
     func getPopwindow(configuration:WKWebViewConfiguration) -> WKWebView {
+        print(#function)
+
         let webView:WKWebView = WKWebView(frame: self.view.frame, configuration: configuration)
         webView.frame =  CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight];
@@ -122,40 +125,36 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func dismissPopWindow(webView:WKWebView) {
+        print(#function)
+        
         if let url = webView.URL?.host?.lowercaseString {
-            var exist = false
-            for host in social {
-                if url.containsString(host) {
-                    exist = true
-                }
-            }
-            
-            if exist == true {
+            if url.containsString(mainURL.host!.lowercaseString) {
                 if self.popWindow != nil {
-                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
-                    dispatch_after(delayTime, dispatch_get_main_queue()) {
-                        if self.popWindow != nil {
-                            self.popWindow?.removeFromSuperview()
-                            self.popWindow = nil
-                        }
-                    }
+                    self.popWindow?.removeFromSuperview()
+                    self.popWindow = nil
                 }
             }
         }
     }
     
     func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        print(#function)
+        
         self.popWindow = self.getPopwindow(configuration)
+        self.popWindow!.loadRequest(navigationAction.request)
         self.popWindow?.navigationDelegate = self
+        self.popWindow?.UIDelegate = self
         self.view.addSubview(self.popWindow!)
         return self.popWindow
     }
     
     func userContentController(userContentController:WKUserContentController, message:WKScriptMessage) {
+        print(#function)
         print(message)
     }
     
     func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+        print(#function)
         print(message)
     }
     
@@ -172,7 +171,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
         print(#function)
-        let alert = UIAlertController(title: "Network Error", message:error.description, preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Network Error", message:error.localizedDescription, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK.", style: .Default) { _ in })
         self.presentViewController(alert, animated: true){}
     }
@@ -184,11 +183,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+        print(#function)
         self.dismissPopWindow(webView)
         decisionHandler(.Allow);
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
+        print(#function)
         decisionHandler(.Allow);
     }
     

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>URL</key>
-	<string>http://www.vimeo.com/</string>
+	<string>https://vimeo.com</string>
 	<key>OneSignalAppID</key>
 	<string>a1766750-0368-4d24-b589-1f45733df3be</string>
 	<key>AdMobBannerUnitId</key>
