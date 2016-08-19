@@ -42,8 +42,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         }
         print(mainURL!)
         
+        self.loadWebSite()
+        self.loadInterstitalAd()
+        self.loadBannerAd()
+    }
+    
+    func loadWebSite() {
         // Create url request
-        let requestObj: NSURLRequest = NSURLRequest(URL: mainURL!);
+        let requestObj: NSURLRequest = NSURLRequest(URL: self.mainURL!);
         
         let theConfiguration:WKWebViewConfiguration? = WKWebViewConfiguration()
         let thisPref:WKPreferences = WKPreferences()
@@ -57,15 +63,16 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.wkWebView?.loadRequest(requestObj)
         self.wkWebView?.navigationDelegate = self
         self.wkWebView?.UIDelegate = self
+    }
 
+    func loadInterstitalAd() {
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         let interstitialId = appData?.valueForKey("AdMobInterstitialUnitId") as? String
         if interstitialId != nil {
             self.interstitial = GADInterstitial(adUnitID: interstitialId!)
             self.interstitial.delegate = self
             self.interstitial.loadRequest(self.request)
         }
-        
-        self.loadBannerAd()
     }
     
     override func viewDidAppear(animated: Bool) {

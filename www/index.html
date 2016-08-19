@@ -1,30 +1,53 @@
-<!DOCTYPE html>
-<html>
-    <body>
-        
-        <p>Click the button to get your coordinates.</p>
-        
-        <button onclick="getLocation()">Try It</button>
-        
-        <p id="demo"></p>
-        
-        <script>
-            var x = document.getElementById("demo");
-            
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition);
-                } else {
-                    x.innerHTML = "Geolocation is not supported by this browser.";
-                }
-            }
-        
-        function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-        }
-        </script>
-        
-    </body>
-</html>
+<div class="user-html">
 
+    <p>
+    <center><img src="https://s3.amazonaws.com/brommko/UniversalWebView/description.jpg" alt="Photo"></center>
+    </p>
+
+    <p><strong>Universal WebView</strong> is an Xcode 6 project that allows you to wrap your website in a super simple iOS app. If you are a web developer who wants to release an iOS app, this should help you cut some corners when it comes to learning Swift. It is ideal for single page web app with on-screen/no navigation. For example, a game, interactive page, web based slideshow, etc.</p>
+
+    <p>Code is <strong>easily configurable and customizable</strong>. There is just one config file to setting up everything, simply edit the included <strong>UniversalWebView.plist</strong> file. You can also check a video manual. Create your own app in less than 15 minutes without any special knowledge! It's easier than you think.</p>
+
+    <h3 id="item-description__features">Features</h3>
+    <ul>
+		<li>Latest XCode</li>
+		<li>Swift Language</li>
+		<li>Support iOS 9</li>
+		<li>AdMob (banner and interstitial ad)</li>
+		<li>Firebase Push Notifications</li>
+		<li>OneSignal</li>
+		<li>Ability to login and signup with social networks like Facebook, Google, LinkedIn and similar.</li>
+		<li>HTML5 videos, YouTube, Vimeo, JW Player</li>
+		<li>Loading indicator when loading the page</li>
+		<li>Easy to use</li>
+		<li>Easy to customise</li>
+		<li>No coding skills required</li>
+		<li>Support all URLs and web sites</li>
+		<li>Geolocation</li>
+		<li>Download manager</li>
+		<li>Fast and powerful webview engine based on the Safari</li>
+		<li>WebView supports JavaScript, Cookies, CSS, images, videos and other standard web tools and technologies</li>
+		<li>Fullscreen video</li>
+		<li>Responsive design (portrait, landscape, handling orientation change)</li>
+		<li>Well documented</li>
+		<li>Top quality clean code created by experienced senior iOS developer</li>
+		<li>Free support</li>
+	</ul>
+
+	<h3 id="item-description__changelog">Changelog</h3>
+	<ul>
+	    <li>Version 1.0.0
+	        <ul>
+	            <li>Initial release</li>
+	        </ul>
+	    </li>
+	    <li>Version 1.1.0
+	        <ul>
+	            <li>OneSignal support</li>
+	            <li>Permissions for location tracking added</li>
+				<li>Ability to login and signup with social networks like Facebook, Google, LinkedIn and similar.</li>
+	        </ul>
+    	</li>
+	</ul>
+
+</div>
