@@ -137,8 +137,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         if let url = webView.URL?.host?.lowercaseString {
             if url.containsString(mainURL.host!.lowercaseString) {
                 if self.popWindow != nil {
-                    self.popWindow?.removeFromSuperview()
-                    self.popWindow = nil
+                    self.dismiss()
                 }
             }
         }
@@ -150,8 +149,19 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.popWindow = self.getPopwindow(configuration)
         self.popWindow?.navigationDelegate = self
         self.popWindow?.UIDelegate = self
-        self.view.addSubview(self.popWindow!)
+        
+        let newViewController = UIViewController()
+        newViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ViewController.dismiss))
+        newViewController.modalPresentationStyle = .OverCurrentContext
+        newViewController.view = self.popWindow
+        let navController = UINavigationController(rootViewController: newViewController)
+        self.presentViewController(navController, animated: true, completion: nil)
+        
         return self.popWindow
+    }
+    
+    func dismiss() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func userContentController(userContentController:WKUserContentController, message:WKScriptMessage) {
