@@ -34,7 +34,6 @@ PODS:
     - Mixpanel/Mixpanel (= 3.0.2)
   - Mixpanel/Mixpanel (3.0.2)
   - OneSignal (1.13.3)
-  - URLNavigator (0.6.0)
 
 DEPENDENCIES:
   - Firebase/AdMob
@@ -43,7 +42,6 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.0.0)
   - Mixpanel
   - OneSignal
-  - URLNavigator
 
 SPEC CHECKSUMS:
   Firebase: 6250071f0e2440a5c4c67b8cb6b868f868237ac3
@@ -58,8 +56,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Mixpanel: 0e4f1f9a2ac612b589b2894830038418c2587428
   OneSignal: 434facae3389cb0d4d3fc57b9a6cf66db685205e
-  URLNavigator: 3f4d7c1e5ec5bace93caea71d1b68ac52edbbddb
 
-PODFILE CHECKSUM: 274244f560b09bfcf6a60f05e1d1f75eca6a1ac9
+PODFILE CHECKSUM: ff1bb00ed888e72f37ee108b93dc7f93853179ed
 
 COCOAPODS: 1.0.1

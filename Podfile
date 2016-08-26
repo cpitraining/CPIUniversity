@@ -5,13 +5,9 @@ target 'UniversalWebView' do
 	use_frameworks!
 
 	pod 'MBProgressHUD', '~> 1.0.0'
-    
     pod 'Firebase/Core'
     pod 'Firebase/AdMob'
     pod 'Firebase/Messaging'
-
     pod 'OneSignal'
     pod 'Mixpanel'
-
-    pod 'URLNavigator'
 end
