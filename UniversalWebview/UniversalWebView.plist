@@ -10,5 +10,7 @@
 	<string>ca-app-pub-3940256099942544/2934735716</string>
 	<key>AdMobInterstitialUnitId</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>MixpanelToken</key>
+	<string>a7cf5399467e818ebf2dc7b5743984c7</string>
 </dict>
 </plist>

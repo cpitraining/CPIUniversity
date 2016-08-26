@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseMessaging
 import FirebaseInstanceID
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-
         
         if NSBundle.mainBundle().pathForResource("GoogleService-Info", ofType: "plist") != nil {
             googlePlistExists = true
@@ -32,8 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         application.registerUserNotificationSettings(settings)
         
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+
         if googlePlistExists == true {
-            UIApplication.sharedApplication().registerForRemoteNotifications()
             
             FIRApp.configure()
             
@@ -70,6 +71,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("OneSignal API Key is not in the plist file!")
         }
         
+        if let mixpanelToken = appData?.valueForKey("MixpanelToken") as? String {
+            let mixpanel = Mixpanel.sharedInstanceWithToken(mixpanelToken)
+            mixpanel.identify(mixpanel.distinctId)
+        }
+        
         return true
     }
     
@@ -87,20 +93,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        print("Message ID: \(userInfo)")
         
         // Print full message.
         print("%@", userInfo)
         
-        let notificationMessage : AnyObject? =  userInfo["alert"]
-        let alert = UIAlertController(title: "UniversalWebView", message:notificationMessage as? String, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK.", style: .Default) { _ in })
-        self.window?.rootViewController?.presentViewController(alert, animated: true){}
-        
+        if application.applicationState == UIApplicationState.Background || application.applicationState == UIApplicationState.Inactive {
+
+        } else {
+            let notificationMessage : AnyObject? =  userInfo["alert"]
+            let alert = UIAlertController(title: "UniversalWebView", message:notificationMessage as? String, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK.", style: .Default) { _ in })
+            self.window?.rootViewController?.presentViewController(alert, animated: true){}
+        }
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+        
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if appData?.valueForKey("MixpanelToken") != nil {
+            Mixpanel.sharedInstance().people.addPushDeviceToken(deviceToken)
+        }
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -112,6 +126,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FIRMessaging.messaging().disconnect()
             print("Disconnected from FCM.")
         }
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        print("openURL \(url)")
+
+        var urlString = url.absoluteString
+        let queryArray = urlString.componentsSeparatedByString("//")
+        
+        var host:String = "http"
+        if queryArray.count > 2 {
+            host = queryArray[1]
+            urlString = queryArray[2]
+        } else {
+            urlString = queryArray[1]
+        }
+        
+        let parsedURLString:String? = "\(host)://\(urlString)"
+        if parsedURLString != nil {
+            NSUserDefaults.standardUserDefaults().setObject(parsedURLString, forKey: "URL")
+        }
+        
+        return true
     }
 
     static func dataPath() -> String {

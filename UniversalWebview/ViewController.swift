@@ -13,9 +13,9 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate  {
     
-    @IBOutlet var bannerView: GADBannerView!
+    @IBOutlet var bannerView: GADBannerView?
     
-    var mainURL:NSURL!
+    var mainURL:NSURL?
     
     var wkWebView: WKWebView!
     var popWindow:WKWebView?
@@ -35,12 +35,18 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         let urlString = appData?.valueForKey("URL") as? String
         
-        if urlString != nil {
-            mainURL = NSURL(string: urlString!)
-        } else {
-            mainURL = NSBundle.mainBundle().URLForResource("index", withExtension: "html")!
+        if let URL = NSUserDefaults.standardUserDefaults().stringForKey("URL") {
+            self.mainURL = NSURL(string: URL)
         }
-        print(mainURL!)
+        
+        if self.mainURL == nil {
+            if urlString != nil {
+                self.mainURL = NSURL(string: urlString!)
+            } else {
+                self.mainURL = NSBundle.mainBundle().URLForResource("index", withExtension: "html")!
+            }
+        }
+        print(self.mainURL!)
         
         self.loadWebSite()
         self.loadInterstitalAd()
@@ -58,7 +64,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         theConfiguration!.preferences = thisPref;
         
         let bounds = UIScreen.mainScreen().bounds
-        let frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - self.bannerView!.frame.height)
+        
+        let frame:CGRect!
+        if self.bannerView != nil {
+            frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - self.bannerView!.frame.height)
+        } else {
+            frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        }
         self.wkWebView = WKWebView(frame: frame, configuration: theConfiguration!)
         self.wkWebView?.loadRequest(requestObj)
         self.wkWebView?.navigationDelegate = self
@@ -95,12 +107,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         let bannerId = appData?.valueForKey("AdMobBannerUnitId") as? String
         if bannerId != nil {
-            bannerView.adUnitID = bannerId
-            bannerView.rootViewController = self
-            bannerView.loadRequest(self.request)
-            bannerView.delegate = self
+            self.bannerView?.adUnitID = bannerId
+            self.bannerView?.rootViewController = self
+            self.bannerView?.loadRequest(self.request)
+            self.bannerView?.delegate = self
         } else {
-            bannerView.hidden = true
+            self.bannerView?.hidden = true
             let bounds = UIScreen.mainScreen().bounds
             let frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
             self.wkWebView.frame = frame
@@ -123,8 +135,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func getPopwindow(configuration:WKWebViewConfiguration) -> WKWebView {
-        print(#function)
-
         let webView:WKWebView = WKWebView(frame: self.view.frame, configuration: configuration)
         webView.frame =  CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight];
@@ -132,10 +142,8 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func dismissPopWindow(webView:WKWebView) {
-        print(#function)
-        
         if let url = webView.URL?.host?.lowercaseString {
-            if url.containsString(mainURL.host!.lowercaseString) {
+            if url.containsString(mainURL!.host!.lowercaseString) {
                 if self.popWindow != nil {
                     self.dismiss()
                 }
@@ -144,8 +152,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        print(#function)
-        
         self.popWindow = self.getPopwindow(configuration)
         self.popWindow?.navigationDelegate = self
         self.popWindow?.UIDelegate = self
@@ -165,52 +171,45 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func userContentController(userContentController:WKUserContentController, message:WKScriptMessage) {
-        print(#function)
         print(message)
     }
     
     func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
-        print(#function)
         print(message)
     }
     
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print(#function)
+
     }
     
     func webView(webView: WKWebView, didCommitNavigation navigation: WKNavigation!) {
-        print(#function)
         // You can inject java script here if required as below
 //        let javascript = "var meta = document.createElement('meta');meta.setAttribute('name', 'viewport');meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');document.getElementsByTagName('head')[0].appendChild(meta);";
 //        self.wkWebView.evaluateJavaScript(javascript, completionHandler: nil)
     }
     
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        print(#function)
         let alert = UIAlertController(title: "Network Error", message:error.localizedDescription, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK.", style: .Default) { _ in })
         self.presentViewController(alert, animated: true){}
     }
     
     func webView(webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        print(#function)
         print(webView.URL?.absoluteString.lowercaseString)
         self.dismissPopWindow(webView)
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        print(#function)
         self.dismissPopWindow(webView)
         decisionHandler(.Allow);
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
-        print(#function)
         decisionHandler(.Allow);
     }
     
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
-        print(#function)
+
     }
     
     override func didReceiveMemoryWarning() {

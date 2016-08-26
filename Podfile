@@ -11,5 +11,7 @@ target 'UniversalWebView' do
     pod 'Firebase/Messaging'
 
     pod 'OneSignal'
+    pod 'Mixpanel'
 
+    pod 'URLNavigator'
 end
