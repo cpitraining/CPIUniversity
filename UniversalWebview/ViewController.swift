@@ -18,7 +18,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     var mainURL:NSURL?
     
     var wkWebView: WKWebView!
-    var popWindow:WKWebView?
+    var popViewController:UIViewController?
     
     var load : MBProgressHUD = MBProgressHUD()
     
@@ -131,7 +131,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         
         NSUserDefaults.standardUserDefaults().removeObjectForKey("URL")
         
-        if self.popWindow == nil {
+        if self.popViewController == nil {
             self.view.addSubview(self.wkWebView!)
             
             if self.interstitial != nil && self.interstitial.isReady {
@@ -142,17 +142,24 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         }
     }
     
-    func getPopwindow(configuration:WKWebViewConfiguration) -> WKWebView {
+    func getViewController(configuration:WKWebViewConfiguration) -> UIViewController {
         let webView:WKWebView = WKWebView(frame: self.view.frame, configuration: configuration)
         webView.frame = UIScreen.mainScreen().bounds
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight];
-        return webView
+        webView.navigationDelegate = self
+        webView.UIDelegate = self
+        
+        let newViewController = UIViewController()
+        newViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ViewController.dismiss))
+        newViewController.modalPresentationStyle = .OverCurrentContext
+        newViewController.view = webView
+        return newViewController
     }
     
     func dismissPopWindow(webView:WKWebView) {
         if let url = webView.URL?.host?.lowercaseString {
             if url.containsString(mainURL!.host!.lowercaseString) {
-                if self.popWindow != nil {
+                if self.popViewController != nil {
                     self.dismiss()
                 }
             }
@@ -160,18 +167,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        self.popWindow = self.getPopwindow(configuration)
-        self.popWindow?.navigationDelegate = self
-        self.popWindow?.UIDelegate = self
-        
-        let newViewController = UIViewController()
-        newViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ViewController.dismiss))
-        newViewController.modalPresentationStyle = .OverCurrentContext
-        newViewController.view = self.popWindow
-        let navController = UINavigationController(rootViewController: newViewController)
+        self.popViewController = self.getViewController(configuration)
+        let navController = UINavigationController(rootViewController: self.popViewController!)
         self.presentViewController(navController, animated: true, completion: nil)
-        
-        return self.popWindow
+        return self.popViewController?.view as? WKWebView
     }
     
     func dismiss() {
