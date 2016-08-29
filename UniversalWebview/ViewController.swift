@@ -156,7 +156,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         return newViewController
     }
     
-    func dismissPopWindow(webView:WKWebView) {
+    func dismissPopViewController(webView:WKWebView) {
         if let url = webView.URL?.host?.lowercaseString {
             if url.containsString(mainURL!.host!.lowercaseString) {
                 if self.popViewController != nil {
@@ -203,11 +203,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func webView(webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         print(webView.URL?.absoluteString.lowercaseString)
-        self.dismissPopWindow(webView)
+        self.dismissPopViewController(webView)
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        self.dismissPopWindow(webView)
+        self.dismissPopViewController(webView)
         decisionHandler(.Allow);
     }
     
