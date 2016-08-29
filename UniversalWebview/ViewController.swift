@@ -28,10 +28,24 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.loadWebView()
+        
+        self.loadInterstitalAd()
+        self.loadBannerAd()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.loadWebView), name:"RefreshSite", object: nil)
+    }
+    
+    func loadWebView() {
         self.load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         self.load.mode = MBProgressHUDMode.Indeterminate
         self.load.label.text = "Loading";
         
+        self.getURL()
+        self.loadWebSite()
+    }
+    
+    func getURL() {
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         let urlString = appData?.valueForKey("URL") as? String
         
@@ -47,10 +61,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             }
         }
         print(self.mainURL!)
-        
-        self.loadWebSite()
-        self.loadInterstitalAd()
-        self.loadBannerAd()
     }
     
     func loadWebSite() {
@@ -122,6 +132,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         print("WebView content loaded.")
         self.load.hideAnimated(true)
+        
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        let urlString = appData?.valueForKey("URL") as? String
+        
+        if self.mainURL != NSURL(string: urlString!) {
+            self.mainURL = NSURL(string: urlString!)
+            NSUserDefaults.standardUserDefaults().setObject(urlString, forKey: "URL")
+        }
         
         if self.popWindow == nil {
             self.view.addSubview(self.wkWebView!)

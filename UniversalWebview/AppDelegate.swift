@@ -145,6 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let parsedURLString:String? = "\(host)://\(urlString)"
         if parsedURLString != nil {
             NSUserDefaults.standardUserDefaults().setObject(parsedURLString, forKey: "URL")
+            NSNotificationCenter.defaultCenter().postNotificationName("RefreshSite", object: nil)
         }
         
         return true

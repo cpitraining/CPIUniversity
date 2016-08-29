@@ -30,9 +30,9 @@ PODS:
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
   - MBProgressHUD (1.0.0)
-  - Mixpanel (3.0.2):
-    - Mixpanel/Mixpanel (= 3.0.2)
-  - Mixpanel/Mixpanel (3.0.2)
+  - Mixpanel (3.0.0):
+    - Mixpanel/Mixpanel (= 3.0.0)
+  - Mixpanel/Mixpanel (3.0.0)
   - OneSignal (1.13.3)
 
 DEPENDENCIES:
@@ -54,7 +54,7 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Mixpanel: 0e4f1f9a2ac612b589b2894830038418c2587428
+  Mixpanel: ac92056ee35a961362513ba11049e67cffcaa1f1
   OneSignal: 434facae3389cb0d4d3fc57b9a6cf66db685205e
 
 PODFILE CHECKSUM: ff1bb00ed888e72f37ee108b93dc7f93853179ed
