@@ -29,7 +29,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         super.viewDidLoad()
         
         self.loadWebView()
-        
         self.loadInterstitalAd()
         self.loadBannerAd()
         
@@ -72,16 +71,8 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         thisPref.javaScriptCanOpenWindowsAutomatically = true;
         thisPref.javaScriptEnabled = true
         theConfiguration!.preferences = thisPref;
-        
-        let bounds = UIScreen.mainScreen().bounds
-        
-        let frame:CGRect!
-        if self.bannerView != nil {
-            frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - self.bannerView!.frame.height)
-        } else {
-            frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-        }
-        self.wkWebView = WKWebView(frame: frame, configuration: theConfiguration!)
+
+        self.wkWebView = WKWebView(frame: self.getFrame(), configuration: theConfiguration!)
         self.wkWebView?.loadRequest(requestObj)
         self.wkWebView?.navigationDelegate = self
         self.wkWebView?.UIDelegate = self
@@ -123,9 +114,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             self.bannerView?.delegate = self
         } else {
             self.bannerView?.hidden = true
-            let bounds = UIScreen.mainScreen().bounds
-            let frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-            self.wkWebView.frame = frame
+            self.wkWebView.frame = self.getFrame()
         }
     }
     
@@ -134,12 +123,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.load.hideAnimated(true)
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        let urlString = appData?.valueForKey("URL") as? String
-        
-        if self.mainURL != NSURL(string: urlString!) {
-            self.mainURL = NSURL(string: urlString!)
-            NSUserDefaults.standardUserDefaults().setObject(urlString, forKey: "URL")
+        if let urlString = appData?.valueForKey("URL") as? String {
+            if self.mainURL != NSURL(string: urlString) {
+                self.mainURL = NSURL(string: urlString)
+            }
         }
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("URL")
         
         if self.popWindow == nil {
             self.view.addSubview(self.wkWebView!)
@@ -154,7 +144,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func getPopwindow(configuration:WKWebViewConfiguration) -> WKWebView {
         let webView:WKWebView = WKWebView(frame: self.view.frame, configuration: configuration)
-        webView.frame =  CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+        webView.frame = UIScreen.mainScreen().bounds
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight];
         return webView
     }
@@ -233,6 +223,22 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        self.wkWebView.frame = self.getFrame()
+    }
+    
+    func getFrame() -> CGRect {
+        let bounds = UIScreen.mainScreen().bounds
+        
+        let frame:CGRect!
+        if self.bannerView?.hidden == false {
+            frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - self.bannerView!.frame.height)
+        } else {
+            frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        }
+        return frame
     }
     
     //Commented:    black status bar.

@@ -44,29 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         if let oneSignalAppID = appData?.valueForKey("OneSignalAppID") as? String {
-            var oneSignal  = OneSignal(launchOptions: launchOptions, appId: oneSignalAppID, handleNotification: nil)
-            OneSignal.defaultClient().enableInAppAlertNotification(true)
-            
-            oneSignal = OneSignal(launchOptions: launchOptions, appId: oneSignalAppID) { (message, additionalData, isActive) in
-                NSLog("OneSignal Notification opened:\nMessage: %@", message)
-                
-                if additionalData != nil {
-                    NSLog("additionalData: %@", additionalData)
-                    // Check for and read any custom values you added to the notification
-                    // This done with the "Additonal Data" section the dashbaord.
-                    // OR setting the 'data' field on our REST API.
-                    if let customKey = additionalData["customKey"] as! String? {
-                        NSLog("customKey: %@", customKey)
-                    }
-                }
-            }
-            
-            oneSignal.IdsAvailable { (userId, pushToken) -> Void in
-                NSLog("OneSignal userId: %@", userId)
-                if pushToken != nil {
-                    NSLog("OneSignal pushToken: %@", pushToken)
-                }
-            }
+            OneSignal.initWithLaunchOptions(launchOptions, appId: oneSignalAppID, handleNotificationAction: nil, settings:
+                [kOSSettingsKeyInAppAlerts: false,
+                    kOSSettingsKeyAutoPrompt: false,
+                    kOSSettingsKeyInAppLaunchURL: false
+                ])
         } else {
             print("OneSignal API Key is not in the plist file!")
         }
@@ -92,19 +74,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        // Print message ID.
-        print("Message ID: \(userInfo)")
-        
-        // Print full message.
-        print("%@", userInfo)
-        
         if application.applicationState == UIApplicationState.Background || application.applicationState == UIApplicationState.Inactive {
 
         } else {
-            let notificationMessage : AnyObject? =  userInfo["alert"]
-            let alert = UIAlertController(title: "UniversalWebView", message:notificationMessage as? String, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK.", style: .Default) { _ in })
-            self.window?.rootViewController?.presentViewController(alert, animated: true){}
+            print("user info: %@", userInfo)
+            if let url:String? = userInfo["custom"]?.objectForKey("u") as? String {
+                print("PUSH url  %@", url)
+                UIApplication.sharedApplication().openURL(NSURL(string : url!)!)
+            } else {
+                let notificationMessage : AnyObject? =  userInfo["alert"]
+                let alert = UIAlertController(title: "UniversalWebView", message:notificationMessage as? String, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK.", style: .Default) { _ in })
+                self.window?.rootViewController?.presentViewController(alert, animated: true){}
+            }
         }
     }
     
