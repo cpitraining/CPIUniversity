@@ -33,7 +33,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.loadWebView()
         self.loadInterstitalAd()
         self.loadBannerAd()
-//        self.loadToolbar()
+        self.loadToolbar()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.loadWebView), name:"RefreshSite", object: nil)
     }
@@ -168,7 +168,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         if self.popViewController == nil {
             
             self.view.addSubview(self.wkWebView!)
-//            self.wkWebView.addSubview(self.toolbar!)
+            self.wkWebView.addSubview(self.toolbar!)
 
             if self.interstitial != nil && self.interstitial.isReady {
                 self.interstitial.presentFromRootViewController(self)
