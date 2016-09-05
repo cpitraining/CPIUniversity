@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C63DB714F099553E014BB5E6 /* Pods_UniversalWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */; };
+		CD479A6F1D7DAD160076BFCE /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */; };
 		CD6A99E11D5B1BAA00E25A08 /* UniversalWebView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */; };
 		CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */; };
 		CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 		7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.debug.xcconfig"; sourceTree = "<group>"; };
 		98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebView.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.release.xcconfig"; sourceTree = "<group>"; };
 		CD27E1DE1D65EFE700EBE817 /* UniversalWebView-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UniversalWebView-Bridging-Header.h"; sourceTree = "<group>"; };
+		CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		CD6A99CB1D5B1B8600E25A08 /* UniversalWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UniversalWebView.plist; path = UniversalWebView/UniversalWebView.plist; sourceTree = "<group>"; };
 		CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */,
 				CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */,
 				CD7BB3941D7D886800A8C565 /* Reachability.swift */,
+				CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */,
 				CD6A99F51D5B1E3500E25A08 /* Main.storyboard */,
 				CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */,
 				CD6A99EB1D5B1C1800E25A08 /* Info.plist */,
@@ -239,6 +242,7 @@
 				CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */,
 				CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */,
 				CD7BB3951D7D886800A8C565 /* Reachability.swift in Sources */,
+				CD479A6F1D7DAD160076BFCE /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
