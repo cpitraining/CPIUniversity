@@ -64,7 +64,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func loadWebSite() {
         // Create url request
-        let requestObj: NSURLRequest = NSURLRequest(URL: self.mainURL!);
+        let requestObj: NSURLRequest?
+        
+        if Reachability.isConnectedToNetwork() {
+            requestObj = NSURLRequest(URL: self.mainURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 0)
+        } else {
+            requestObj = NSURLRequest(URL: self.mainURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataDontLoad, timeoutInterval: 0)
+            self.bannerView?.hidden = true
+        }
         
         let theConfiguration:WKWebViewConfiguration? = WKWebViewConfiguration()
         let thisPref:WKPreferences = WKPreferences()
@@ -73,7 +80,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         theConfiguration!.preferences = thisPref;
 
         self.wkWebView = WKWebView(frame: self.getFrame(), configuration: theConfiguration!)
-        self.wkWebView?.loadRequest(requestObj)
+        self.wkWebView?.loadRequest(requestObj!)
         self.wkWebView?.navigationDelegate = self
         self.wkWebView?.UIDelegate = self
     }

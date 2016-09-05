@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         
+        let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
+        NSURLCache.setSharedURLCache(URLCache)
+        
         if NSBundle.mainBundle().pathForResource("GoogleService-Info", ofType: "plist") != nil {
             googlePlistExists = true
         }
