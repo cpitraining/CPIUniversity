@@ -13,8 +13,7 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate  {
     
-    @IBOutlet var bannerView: GADBannerView?
-    
+    var bannerView: GADBannerView?
     var toolbar:UIToolbar?
     var backButton: UIBarButtonItem?
     var forwardButton: UIBarButtonItem?
@@ -30,10 +29,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadWebView()
+        self.loadToolbar()
         self.loadInterstitalAd()
         self.loadBannerAd()
-        self.loadToolbar()
+        self.loadWebView()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.loadWebView), name:"RefreshSite", object: nil)
     }
@@ -92,7 +91,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             requestObj = NSURLRequest(URL: self.mainURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 0)
         } else {
             requestObj = NSURLRequest(URL: self.mainURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataDontLoad, timeoutInterval: 0)
-            self.bannerView?.hidden = true
         }
         
         let theConfiguration:WKWebViewConfiguration? = WKWebViewConfiguration()
@@ -117,9 +115,8 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
 
     func loadInterstitalAd() {
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        let interstitialId = appData?.valueForKey("AdMobInterstitialUnitId") as? String
-        if interstitialId != nil {
-            self.interstitial = GADInterstitial(adUnitID: interstitialId!)
+        if let interstitialId = appData?.valueForKey("AdMobInterstitialUnitId") as? String {
+            self.interstitial = GADInterstitial(adUnitID: interstitialId)
             self.interstitial.delegate = self
             self.interstitial.loadRequest(self.request)
         }
@@ -130,7 +127,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func adViewDidReceiveAd(bannerView: GADBannerView!) {
-        bannerView.hidden = false
+
     }
     
     func adView(bannerView: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
@@ -139,15 +136,21 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func loadBannerAd(){
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        let bannerId = appData?.valueForKey("AdMobBannerUnitId") as? String
-        if bannerId != nil {
+        if let bannerId = appData?.valueForKey("AdMobBannerUnitId") as? String {
+            let bounds = UIScreen.mainScreen().bounds
+
+            var y:CGFloat = bounds.height - 50
+            if self.toolbar != nil {
+                y = y - self.toolbar!.frame.height
+            }
+            
+            self.bannerView = GADBannerView(frame: CGRect(x: 0, y: y, width: bounds.width, height: 50))
             self.bannerView?.adUnitID = bannerId
             self.bannerView?.rootViewController = self
             self.bannerView?.loadRequest(self.request)
             self.bannerView?.delegate = self
-            self.bannerView?.hidden = false
         } else {
-            self.bannerView?.hidden = true
+            self.bannerView?.removeFromSuperview()
             self.wkWebView.frame = self.getFrame()
         }
     }
@@ -166,14 +169,22 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         NSUserDefaults.standardUserDefaults().removeObjectForKey("URL")
         
         if self.popViewController == nil {
-            
-            self.view.addSubview(self.wkWebView!)
-            self.wkWebView.addSubview(self.toolbar!)
-
             if self.interstitial != nil && self.interstitial.isReady {
                 self.interstitial.presentFromRootViewController(self)
             } else {
                 self.loadBannerAd()
+            }
+            
+            if self.wkWebView != nil {
+                self.view.addSubview(self.wkWebView!)
+            }
+            
+            if self.toolbar != nil {
+                self.view.addSubview(self.toolbar!)
+            }
+            
+            if self.bannerView != nil {
+                self.view.addSubview(self.bannerView!)
             }
         }
     }
@@ -267,41 +278,45 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     func getFrame() -> CGRect {
         let bounds = UIScreen.mainScreen().bounds
         
-        let frame:CGRect!
-        if self.bannerView?.hidden == false {
-            frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - self.bannerView!.frame.height - 44)
-        } else {
-            frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - 44)
+        var height:CGFloat = bounds.height
+        if self.bannerView != nil {
+            height = height - self.bannerView!.frame.height
+        }
+        
+        if self.toolbar != nil {
+            height = height - self.toolbar!.frame.height
         }
 
-        return frame
+        return  CGRect(x: 0, y: 0, width: bounds.width, height: height)
     }
     
-    func getToolbar() -> UIToolbar {
-        var toolbar: UIToolbar!
-        
-        self.backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(ViewController.back))
-        self.forwardButton = UIBarButtonItem(image: UIImage(named: "forward"), style: .Plain, target: self, action: #selector(ViewController.forward))
-        self.reloadButton = UIBarButtonItem(image: UIImage(named: "refresh"), style: .Plain, target: self, action: #selector(ViewController.reload))
-
-        self.backButton?.tintColor = UIColor(hexString: "0e8494")
-        self.forwardButton?.tintColor = UIColor(hexString: "0e8494")
-        self.reloadButton?.tintColor = UIColor(hexString: "0e8494")
-        
-        let fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: self, action: nil)
-        fixedSpaceButton.width = 42
-        let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
-        
-        var items = [UIBarButtonItem]()
-        items.append(self.backButton!)
-        items.append(fixedSpaceButton)
-        items.append(self.forwardButton!)
-        items.append(flexibleSpaceButton)
-        items.append(self.reloadButton!)
-        
-        toolbar = UIToolbar(frame: CGRect(x: 0, y: self.getFrame().height - 44, width: self.getFrame().width, height: 44))
-        toolbar.setItems(items, animated: true)
-        
+    func getToolbar() -> UIToolbar? {
+        var toolbar: UIToolbar?
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if appData?.valueForKey("Toolbar") as? Bool == true {
+            self.backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .Plain, target: self, action: #selector(ViewController.back))
+            self.forwardButton = UIBarButtonItem(image: UIImage(named: "forward"), style: .Plain, target: self, action: #selector(ViewController.forward))
+            self.reloadButton = UIBarButtonItem(image: UIImage(named: "refresh"), style: .Plain, target: self, action: #selector(ViewController.reload))
+            
+            self.backButton?.tintColor = UIColor(hexString: "0e8494")
+            self.forwardButton?.tintColor = UIColor(hexString: "0e8494")
+            self.reloadButton?.tintColor = UIColor(hexString: "0e8494")
+            
+            let fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: self, action: nil)
+            fixedSpaceButton.width = 42
+            let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+            
+            var items = [UIBarButtonItem]()
+            items.append(self.backButton!)
+            items.append(fixedSpaceButton)
+            items.append(self.forwardButton!)
+            items.append(flexibleSpaceButton)
+            items.append(self.reloadButton!)
+            
+            let bounds = UIScreen.mainScreen().bounds
+            toolbar = UIToolbar(frame: CGRect(x: 0, y: bounds.height - 40, width: bounds.width, height: 40))
+            toolbar!.setItems(items, animated: true)
+        }
         return toolbar
     }
     

@@ -16,27 +16,9 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-X4-5xO" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="6WQ-L4-oGB"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Dga-X4-5xO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YG6-4o-1Di"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Dga-X4-5xO" secondAttribute="bottom" id="jsb-3U-eW3"/>
-                            <constraint firstItem="Dga-X4-5xO" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="kSM-Sg-ZjX"/>
-                            <constraint firstAttribute="trailing" secondItem="Dga-X4-5xO" secondAttribute="trailing" id="pmY-l2-c3s"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="b6q-rx-O0O"/>
-                    <connections>
-                        <outlet property="bannerView" destination="Dga-X4-5xO" id="6jI-lI-HdP"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
