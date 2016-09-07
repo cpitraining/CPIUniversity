@@ -20,7 +20,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     var reloadButton: UIBarButtonItem?
     
     var mainURL:NSURL?
-    var wkWebView: WKWebView!
+    var wkWebView: WKWebView?
     var popViewController:UIViewController?
     var load : MBProgressHUD = MBProgressHUD()
     var interstitial: GADInterstitial!
@@ -44,16 +44,18 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func back() {
-        self.wkWebView.goBack()
+        self.wkWebView?.goBack()
     }
     
     func forward() {
-        self.wkWebView.goForward()
+        self.wkWebView?.goForward()
     }
     
     func reload() {
-        let request = NSURLRequest(URL:self.wkWebView.URL!)
-        self.wkWebView.loadRequest(request)
+        if let URL = self.wkWebView?.URL {
+            let request = NSURLRequest(URL: URL)
+            self.wkWebView?.loadRequest(request)
+        }
     }
     
     func loadWebView() {
@@ -151,7 +153,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             self.bannerView?.delegate = self
         } else {
             self.bannerView?.removeFromSuperview()
-            self.wkWebView.frame = self.getFrame()
+            self.wkWebView?.frame = self.getFrame()
         }
     }
     
@@ -203,12 +205,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         return newViewController
     }
     
-    func dismissPopViewController(webView:WKWebView) {
-        if let url = webView.URL?.host?.lowercaseString {
-            if url.containsString(mainURL!.host!.lowercaseString) {
-                if self.popViewController != nil {
-                    self.dismiss()
-                }
+    func dismissPopViewController(domain:String) {
+        let mainDomain = self.getDomainFromURL(self.mainURL!)
+        if domain == mainDomain{
+            if self.popViewController != nil {
+                self.dismiss()
             }
         }
     }
@@ -290,13 +291,29 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        print(webView.URL?.absoluteString.lowercaseString)
-        self.dismissPopViewController(webView)
+//        print(webView.URL?.host!.lowercaseString)
+        
+        let domain = self.getDomainFromURL(webView.URL)
+        self.dismissPopViewController(domain)
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        self.dismissPopViewController(webView)
-        decisionHandler(.Allow);
+        print("NAVIGATION URL: \(navigationAction.request.URL!.host)")
+        print("MAIN URL: \(self.mainURL!.host)")
+
+        let domain = self.getDomainFromURL(navigationAction.request.URL!)
+        let mainDomain = self.getDomainFromURL(self.mainURL!)
+
+        print("navigationType: \(navigationAction.navigationType.rawValue)")
+        
+        if (navigationAction.navigationType == WKNavigationType.LinkActivated && domain != mainDomain) {
+            print("domains: \(domains)")
+            
+            self.dismissPopViewController(domain)
+            decisionHandler(WKNavigationActionPolicy.Cancel)
+        } else {
+            decisionHandler(WKNavigationActionPolicy.Allow)
+        }
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
@@ -313,7 +330,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        self.wkWebView.frame = self.getFrame()
+        self.wkWebView?.frame = self.getFrame()
     }
     
     func getFrame() -> CGRect {
@@ -359,6 +376,43 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             toolbar!.setItems(items, animated: true)
         }
         return toolbar
+    }
+    
+    func getDomainFromURL(url:NSURL?) -> String {
+        var domain:String = ""
+        let domains = self.domains()
+        if url?.host != nil {
+            let host = url!.host?.lowercaseString
+            var separatedHost = host?.componentsSeparatedByString(".")
+            separatedHost = separatedHost?.reverse()
+            
+            for tld in separatedHost! {
+                if domains.containsObject(tld.uppercaseString) {
+                    domain = ".\(tld)\(domain)"
+                } else {
+                    domain = "\(tld)\(domain)"
+                    break
+                }
+            }
+        }
+        return domain
+    }
+    
+    func domains() -> NSArray {
+        if let url = NSBundle.mainBundle().URLForResource("domains", withExtension: "json") {
+            if let data = NSData(contentsOfURL: url) {
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                    if let domains = json as? [String] {
+                        return domains
+                    }
+                } catch {
+                    print("error serializing JSON: \(error)")
+                }
+            }
+            print("Error!! Unable to load domains.json.json")
+        }
+        return []
     }
     
     //Commented:    black status bar.
