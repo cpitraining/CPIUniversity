@@ -214,47 +214,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         }
     }
     
-    
-//    +(NSString*)findTLDWithURL:(NSString*)url{
-//    NSString *domain;
-//    
-//    FMDatabase *db = [[DBManager sharedDBManager] controllerDatabase];
-//    NSString * urlHost = [[NSURL URLWithString:url] host];
-//    NSArray* urlArray = [urlHost componentsSeparatedByString:@"."];
-//    
-//    NSString * query;
-//    FMResultSet *result;
-//    NSString * dotDomain;
-//    for (id dotMember in [urlArray reverseObjectEnumerator])
-//    {
-//    if (!dotDomain) {
-//    dotDomain = dotMember;
-//    } else {
-//    dotDomain = [NSString stringWithFormat:@"%@.%@", dotDomain, dotMember];
-//    }
-//    query = [NSString stringWithFormat:@"SELECT * FROM site_domains WHERE domain = '%@' and active='1';", dotDomain];
-//    result = [db executeQuery:query];
-//    if ([result next]) {
-//    domain = [result stringForColumn:@"domain"];
-//    } else {
-//    break;
-//    }
-//    [result close];
-//    }
-//    
-//    NSArray* urlReturn = [dotDomain componentsSeparatedByString:@"."];
-//    dotDomain = nil;
-//    for (id dotMember in [urlReturn reverseObjectEnumerator])
-//    {
-//    if (!dotDomain) {
-//    dotDomain = dotMember;
-//    } else {
-//    dotDomain = [NSString stringWithFormat:@"%@.%@", dotDomain, dotMember];
-//    }
-//    }
-//    return dotDomain;
-//    }
-    
     func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         self.popViewController = self.getViewController(configuration)
         let navController = UINavigationController(rootViewController: self.popViewController!)
