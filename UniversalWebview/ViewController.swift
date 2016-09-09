@@ -29,6 +29,8 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.request.testDevices = ["bb394635b98430350b538d1e2ea1e9d6", kGADSimulatorID];
+        
         self.loadToolbar()
         self.loadInterstitalAd()
         self.loadBannerAd()
@@ -262,15 +264,38 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
 
         let domain = self.getDomainFromURL(navigationAction.request.URL!)
         let mainDomain = self.getDomainFromURL(self.mainURL!)
-
-        print("navigationType: \(navigationAction.navigationType.rawValue)")
         
-        if (navigationAction.navigationType == WKNavigationType.LinkActivated && domain != mainDomain) {
-            print("domains: \(domains)")
+        if (navigationAction.navigationType == WKNavigationType.LinkActivated) {
+            print("domains: \(domain)")
+            print("navigationType: LinkActivated")
             
-            self.dismissPopViewController(domain)
-            decisionHandler(WKNavigationActionPolicy.Cancel)
+            if domain == mainDomain {
+                
+            } else {
+                self.dismissPopViewController(domain)
+            }
+            decisionHandler(WKNavigationActionPolicy.Allow)
+        } else if (navigationAction.navigationType == WKNavigationType.BackForward) {
+            print("navigationType: BackForward")
+            decisionHandler(WKNavigationActionPolicy.Allow)
+        } else if (navigationAction.navigationType == WKNavigationType.FormResubmitted) {
+            print("navigationType: FormResubmitted")
+            decisionHandler(WKNavigationActionPolicy.Allow)
+        } else if (navigationAction.navigationType == WKNavigationType.FormSubmitted) {
+            print("navigationType: FormSubmitted")
+            if domain == mainDomain {
+                
+            } else {
+                self.dismissPopViewController(domain)
+            }
+            decisionHandler(WKNavigationActionPolicy.Allow)
+        } else if (navigationAction.navigationType == WKNavigationType.Reload) {
+            print("navigationType: Reload")
+            decisionHandler(WKNavigationActionPolicy.Allow)
         } else {
+            if domain == "" && domain != mainDomain {
+                self.dismiss()
+            }
             decisionHandler(WKNavigationActionPolicy.Allow)
         }
     }
