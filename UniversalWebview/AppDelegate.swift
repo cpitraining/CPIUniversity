@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FIRApp.configure()
             
             // Add observer for InstanceID token refresh callback.
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.tokenRefreshNotification), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         }
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())

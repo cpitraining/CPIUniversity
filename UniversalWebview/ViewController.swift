@@ -246,9 +246,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        let alert = UIAlertController(title: "Network Error", message:error.localizedDescription, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK.", style: .Default) { _ in })
-        self.presentViewController(alert, animated: true){}
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if let urlString = appData?.valueForKey("404") as? String {
+            let request = NSURLRequest(URL: NSURL(string: urlString)!)
+            self.wkWebView?.loadRequest(request)
+        }
     }
     
     func webView(webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
@@ -263,17 +265,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         print("MAIN URL: \(self.mainURL!.host)")
 
         let domain = self.getDomainFromURL(navigationAction.request.URL!)
-        let mainDomain = self.getDomainFromURL(self.mainURL!)
         
         if (navigationAction.navigationType == WKNavigationType.LinkActivated) {
             print("domains: \(domain)")
             print("navigationType: LinkActivated")
             
-            if domain == mainDomain {
-                
-            } else {
-                self.dismissPopViewController(domain)
-            }
+            self.dismissPopViewController(domain)
             decisionHandler(WKNavigationActionPolicy.Allow)
         } else if (navigationAction.navigationType == WKNavigationType.BackForward) {
             print("navigationType: BackForward")
@@ -283,19 +280,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             decisionHandler(WKNavigationActionPolicy.Allow)
         } else if (navigationAction.navigationType == WKNavigationType.FormSubmitted) {
             print("navigationType: FormSubmitted")
-            if domain == mainDomain {
-                
-            } else {
-                self.dismissPopViewController(domain)
-            }
+            self.dismissPopViewController(domain)
             decisionHandler(WKNavigationActionPolicy.Allow)
         } else if (navigationAction.navigationType == WKNavigationType.Reload) {
             print("navigationType: Reload")
             decisionHandler(WKNavigationActionPolicy.Allow)
         } else {
-            if domain == "" && domain != mainDomain {
-                self.dismiss()
-            }
+            self.dismissPopViewController(domain)
             decisionHandler(WKNavigationActionPolicy.Allow)
         }
     }

@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>URL</key>
-	<string>https://app.oneall.com/signup/</string>
+	<string>https://cnn.com</string>
+	<key>404</key>
+	<string>https://www.say-khonkaen.com/app</string>
 	<key>Toolbar</key>
 	<true/>
 	<key>AdMobBannerUnitId</key>
