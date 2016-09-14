@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,13 +17,30 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="idm-Xy-jH9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="idm-Xy-jH9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="DLM-mv-afR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="idm-Xy-jH9" secondAttribute="bottom" id="OcD-Er-shP"/>
+                            <constraint firstItem="idm-Xy-jH9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Rh2-cA-8tf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="idm-Xy-jH9" secondAttribute="trailing" constant="-20" id="dnA-I7-Kpo"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="b6q-rx-O0O"/>
+                    <connections>
+                        <outlet property="backgroundImage" destination="idm-Xy-jH9" id="NAH-EE-Y6e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="588" y="379"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="splash" width="2048" height="2048"/>
+    </resources>
 </document>

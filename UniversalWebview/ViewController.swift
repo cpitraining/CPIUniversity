@@ -13,6 +13,8 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate  {
     
+    @IBOutlet weak var backgroundImage: UIImageView?
+
     var bannerView: GADBannerView?
     var toolbar:UIToolbar?
     var backButton: UIBarButtonItem?
@@ -39,6 +41,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.loadWebView), name:"RefreshSite", object: nil)
     }
     
+    func showLoader() {
+        self.load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        self.load.mode = MBProgressHUDMode.Indeterminate
+    }
+    
     func loadToolbar() {
         self.toolbar = self.getToolbar()
         self.backButton?.enabled = false
@@ -55,16 +62,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func reload() {
         if let URL = self.wkWebView?.URL {
+            self.showLoader()
             let request = NSURLRequest(URL: URL)
             self.wkWebView?.loadRequest(request)
         }
     }
     
     func loadWebView() {
-        self.load = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        self.load.mode = MBProgressHUDMode.Indeterminate
-        self.load.label.text = "Loading";
-        
         self.getURL()
         self.loadWebSite()
     }
@@ -160,36 +164,42 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        print("WebView content loaded.")
-        self.load.hideAnimated(true)
         
-        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if let urlString = appData?.valueForKey("URL") as? String {
-            if self.mainURL != NSURL(string: urlString) {
-                self.mainURL = NSURL(string: urlString)
-            }
-        }
+        self.backgroundImage?.removeFromSuperview()
         
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("URL")
-        
-        if self.popViewController == nil {
-            if self.interstitial != nil && self.interstitial.isReady {
-                self.interstitial.presentFromRootViewController(self)
-            } else {
-                self.loadBannerAd()
+        UIView.transitionWithView(self.view, duration: 0.1, options: .TransitionCrossDissolve, animations: {
+            
+            let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+            if let urlString = appData?.valueForKey("URL") as? String {
+                if self.mainURL != NSURL(string: urlString) {
+                    self.mainURL = NSURL(string: urlString)
+                }
             }
             
-            if self.wkWebView != nil {
-                self.view.addSubview(self.wkWebView!)
+            NSUserDefaults.standardUserDefaults().removeObjectForKey("URL")
+            
+            if self.popViewController == nil {
+                if self.interstitial != nil && self.interstitial.isReady {
+                    self.interstitial.presentFromRootViewController(self)
+                } else {
+                    self.loadBannerAd()
+                }
+                
+                if self.wkWebView != nil {
+                    self.view.addSubview(self.wkWebView!)
+                }
+                
+                if self.toolbar != nil {
+                    self.view.addSubview(self.toolbar!)
+                }
+                
+                if self.bannerView != nil {
+                    self.view.addSubview(self.bannerView!)
+                }
             }
             
-            if self.toolbar != nil {
-                self.view.addSubview(self.toolbar!)
-            }
-            
-            if self.bannerView != nil {
-                self.view.addSubview(self.bannerView!)
-            }
+        }) { (success) in
+            self.load.hideAnimated(true)
         }
     }
     
@@ -247,15 +257,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if let urlString = appData?.valueForKey("404") as? String {
-            let request = NSURLRequest(URL: NSURL(string: urlString)!)
+        if let backupURL = appData?.valueForKey("BackupURL") as? String {
+            let request = NSURLRequest(URL: NSURL(string: backupURL)!)
             self.wkWebView?.loadRequest(request)
         }
     }
     
     func webView(webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-//        print(webView.URL?.host!.lowercaseString)
-        
         let domain = self.getDomainFromURL(webView.URL)
         self.dismissPopViewController(domain)
     }
