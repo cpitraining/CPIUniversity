@@ -20,33 +20,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var googlePlistExists = false
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
-        let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
-        NSURLCache.setSharedURLCache(URLCache)
+        let URLCache = Foundation.URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
+        Foundation.URLCache.shared = URLCache
         
-        if NSBundle.mainBundle().pathForResource("GoogleService-Info", ofType: "plist") != nil {
+        if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
             googlePlistExists = true
         }
-
-        let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
         
-        UIApplication.sharedApplication().registerForRemoteNotifications()
+        if #available(iOS 10, *) {
+            //Notifications get posted to the function (delegate):  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void)"
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                guard error == nil else {
+                    //Display Error.. Handle Error.. etc..
+                    return
+                }
+                
+                if granted {
+                    //Do stuff here..
+                } else {
+                    //Handle user denying permissions..
+                }
+            }
+        } else {
+            let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        }
 
         if googlePlistExists == true {
             
             FIRApp.configure()
             
             // Add observer for InstanceID token refresh callback.
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.tokenRefreshNotification), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.tokenRefreshNotification), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         }
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if let oneSignalAppID = appData?.valueForKey("OneSignalAppID") as? String {
+        if let oneSignalAppID = appData?.value(forKey: "OneSignalAppID") as? String {
             OneSignal.initWithLaunchOptions(launchOptions, appId: oneSignalAppID, handleNotificationAction: nil, settings:
                 [kOSSettingsKeyInAppAlerts: false,
                     kOSSettingsKeyAutoPrompt: false,
@@ -56,18 +71,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("OneSignal API Key is not in the plist file!")
         }
         
-        if let mixpanelToken = appData?.valueForKey("MixpanelToken") as? String {
-            let mixpanel = Mixpanel.sharedInstanceWithToken(mixpanelToken)
+        if let mixpanelToken = appData?.value(forKey: "MixpanelToken") as? String {
+            let mixpanel = Mixpanel.sharedInstance(withToken: mixpanelToken)
             mixpanel.identify(mixpanel.distinctId)
         }
         
         return true
     }
     
-    func tokenRefreshNotification(notification: NSNotification) {
+    func tokenRefreshNotification(_ notification: Notification) {
         let refreshedToken:String? = FIRInstanceID.instanceID().token()
         print("FOREBASE TOKEN: \(refreshedToken)")
-        FIRMessaging.messaging().connectWithCompletion { (error) in
+        FIRMessaging.messaging().connect { (error) in
             if (error != nil) {
                 print("Unable to connect with FCM. \(error)")
             } else {
@@ -76,48 +91,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        if application.applicationState == UIApplicationState.Background || application.applicationState == UIApplicationState.Inactive {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        if application.applicationState == UIApplicationState.background || application.applicationState == UIApplicationState.inactive {
 
         } else {
             print("user info: %@", userInfo)
-            if let url:String? = userInfo["custom"]?.objectForKey("u") as? String {
-                print("PUSH url  %@", url)
-                UIApplication.sharedApplication().openURL(NSURL(string : url!)!)
-            } else {
-                let notificationMessage : AnyObject? =  userInfo["alert"]
-                let alert = UIAlertController(title: "UniversalWebView", message:notificationMessage as? String, preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK.", style: .Default) { _ in })
-                self.window?.rootViewController?.presentViewController(alert, animated: true){}
-            }
+//            if let url:String? = (userInfo["custom"] as AnyObject).object(forKey: "u") as? String {
+//                print("PUSH url  %@", url)
+//                UIApplication.shared.openURL(URL(string : url!)!)
+//            } else {
+                let notificationMessage : AnyObject? =  userInfo["alert"] as AnyObject?
+                let alert = UIAlertController(title: "UniversalWebView", message:notificationMessage as? String, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK.", style: .default) { _ in })
+                self.window?.rootViewController?.present(alert, animated: true){}
+//            }
         }
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if appData?.valueForKey("MixpanelToken") != nil {
+        if appData?.value(forKey: "MixpanelToken") != nil {
             Mixpanel.sharedInstance().people.addPushDeviceToken(deviceToken)
         }
     }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Couldn't register: \(error)")
     }
     
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         if googlePlistExists == true {
             FIRMessaging.messaging().disconnect()
             print("Disconnected from FCM.")
         }
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("openURL \(url)")
 
         var urlString = url.absoluteString
-        let queryArray = urlString.componentsSeparatedByString("//")
+        let queryArray = urlString.components(separatedBy: "//")
         
         var host:String = "http"
         if queryArray.count > 2 {
@@ -129,15 +144,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let parsedURLString:String? = "\(host)://\(urlString)"
         if parsedURLString != nil {
-            NSUserDefaults.standardUserDefaults().setObject(parsedURLString, forKey: "URL")
-            NSNotificationCenter.defaultCenter().postNotificationName("RefreshSite", object: nil)
+            UserDefaults.standard.set(parsedURLString, forKey: "URL")
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "RefreshSite"), object: nil)
         }
         
         return true
     }
 
     static func dataPath() -> String {
-        return NSBundle.mainBundle().pathForResource("UniversalWebView", ofType: "plist")!
+        return Bundle.main.path(forResource: "UniversalWebView", ofType: "plist")!
     }
 }
 
