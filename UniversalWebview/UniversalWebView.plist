@@ -9,12 +9,12 @@
 	<key>Toolbar</key>
 	<true/>
 	<key>AdMobBannerUnitId</key>
-	<string>ca-app-pub-3381628848661821/5420508039</string>
+	<string>ca-app-pub-5514315741534690/3580595564</string>
 	<key>AdMobInterstitialUnitId</key>
-	<string>ca-app-pub-3381628848661821/6897241230</string>
+	<string>ca-app-pub-5514315741534690/5057328761</string>
 	<key>OneSignalAppID</key>
-	<string>a1766750-0368-4d24-b589-1f45733df3be</string>
+	<string>ec291a7f-c387-4c06-a37e-34b0b24d97bf</string>
 	<key>MixpanelToken</key>
-	<string>a7cf5399467e818ebf2dc7b5743984c7</string>
+	<string>02071cb2089de2044c83a80d0d7b29e5</string>
 </dict>
 </plist>

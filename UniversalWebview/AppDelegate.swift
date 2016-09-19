@@ -14,20 +14,20 @@ import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     var googlePlistExists = false
-
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         UIApplication.shared.applicationIconBadgeNumber = 0
         
-        let URLCache = Foundation.URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
-        Foundation.URLCache.shared = URLCache
-        
+        let urlCache = URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
+        URLCache.shared = urlCache
+
         if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
             googlePlistExists = true
         }
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         }
-
+        
         if googlePlistExists == true {
             
             FIRApp.configure()
@@ -64,9 +64,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let oneSignalAppID = appData?.value(forKey: "OneSignalAppID") as? String {
             OneSignal.initWithLaunchOptions(launchOptions, appId: oneSignalAppID, handleNotificationAction: nil, settings:
                 [kOSSettingsKeyInAppAlerts: false,
-                    kOSSettingsKeyAutoPrompt: false,
-                    kOSSettingsKeyInAppLaunchURL: false
+                 kOSSettingsKeyAutoPrompt: false,
+                 kOSSettingsKeyInAppLaunchURL: false
                 ])
+            print("OneSignal registered!")
         } else {
             print("OneSignal API Key is not in the plist file!")
         }
@@ -74,6 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let mixpanelToken = appData?.value(forKey: "MixpanelToken") as? String {
             let mixpanel = Mixpanel.sharedInstance(withToken: mixpanelToken)
             mixpanel.identify(mixpanel.distinctId)
+            print("Mixpanel registered!")
+            
+            Mixpanel.sharedInstance().track("Mixpanel registered", properties: nil)
+        } else {
+            print("Mixpanel API Key is not in the plist file!")
         }
         
         return true
@@ -93,18 +99,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         if application.applicationState == UIApplicationState.background || application.applicationState == UIApplicationState.inactive {
-
+            
         } else {
             print("user info: %@", userInfo)
-//            if let url:String? = (userInfo["custom"] as AnyObject).object(forKey: "u") as? String {
-//                print("PUSH url  %@", url)
-//                UIApplication.shared.openURL(URL(string : url!)!)
-//            } else {
-                let notificationMessage : AnyObject? =  userInfo["alert"] as AnyObject?
-                let alert = UIAlertController(title: "UniversalWebView", message:notificationMessage as? String, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK.", style: .default) { _ in })
-                self.window?.rootViewController?.present(alert, animated: true){}
-//            }
+            let notificationMessage : AnyObject? =  userInfo["alert"] as AnyObject?
+            let alert = UIAlertController(title: "UniversalWebView", message:notificationMessage as? String, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK.", style: .default) { _ in })
+            self.window?.rootViewController?.present(alert, animated: true){}
         }
     }
     
@@ -130,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         print("openURL \(url)")
-
+        
         var urlString = url.absoluteString
         let queryArray = urlString.components(separatedBy: "//")
         
@@ -150,7 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
+    
     static func dataPath() -> String {
         return Bundle.main.path(forResource: "UniversalWebView", ofType: "plist")!
     }
