@@ -16,6 +16,7 @@
 		CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99F51D5B1E3500E25A08 /* Main.storyboard */; };
 		CD71C20C1D62FC0000C5EFFA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = CD71C20B1D62FC0000C5EFFA /* index.html */; };
 		CD7BB3951D7D886800A8C565 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BB3941D7D886800A8C565 /* Reachability.swift */; };
+		CD999E1C1D95478F009AF731 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */; };
 		CDBE24E31D800D52007B9363 /* domains.json in Resources */ = {isa = PBXBuildFile; fileRef = CDBE24E21D800D52007B9363 /* domains.json */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		CD6A99F51D5B1E3500E25A08 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CD71C20B1D62FC0000C5EFFA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		CD7BB3941D7D886800A8C565 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		CDBE24E21D800D52007B9363 /* domains.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = domains.json; sourceTree = "<group>"; };
 		CDC4D5121D8BDFE4009DFDD5 /* UniversalWebView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UniversalWebView.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 				CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */,
 				CDBE24E21D800D52007B9363 /* domains.json */,
 				CD6A99F51D5B1E3500E25A08 /* Main.storyboard */,
+				CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */,
 				CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */,
 				CD6A99EB1D5B1C1800E25A08 /* Info.plist */,
 				CD27E1DE1D65EFE700EBE817 /* UniversalWebView-Bridging-Header.h */,
@@ -184,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD999E1C1D95478F009AF731 /* Launch Screen.storyboard in Resources */,
 				CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */,
 				CD71C20C1D62FC0000C5EFFA /* index.html in Resources */,
 				CDBE24E31D800D52007B9363 /* domains.json in Resources */,
@@ -207,7 +211,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DB65B082F3B06527E81C52ED /* [CP] Embed Pods Frameworks */ = {

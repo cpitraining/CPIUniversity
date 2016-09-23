@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -25,8 +25,8 @@
                         <constraints>
                             <constraint firstItem="idm-Xy-jH9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="DLM-mv-afR"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="idm-Xy-jH9" secondAttribute="bottom" id="OcD-Er-shP"/>
-                            <constraint firstItem="idm-Xy-jH9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Rh2-cA-8tf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="idm-Xy-jH9" secondAttribute="trailing" constant="-20" id="dnA-I7-Kpo"/>
+                            <constraint firstItem="idm-Xy-jH9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="Rh2-cA-8tf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="idm-Xy-jH9" secondAttribute="trailing" constant="-16" id="dnA-I7-Kpo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="b6q-rx-O0O"/>
@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="588" y="379"/>
+            <point key="canvasLocation" x="588" y="378.26086956521743"/>
         </scene>
     </scenes>
     <resources>
