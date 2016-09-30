@@ -16,5 +16,7 @@
 	<string>ec291a7f-c387-4c06-a37e-34b0b24d97bf</string>
 	<key>MixpanelToken</key>
 	<string>02071cb2089de2044c83a80d0d7b29e5</string>
+	<key>ShowInterstitialInSecoundsEvery</key>
+	<string>60</string>
 </dict>
 </plist>

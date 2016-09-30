@@ -28,6 +28,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     var interstitial: GADInterstitial!
     let request = GADRequest()
     
+    var timer:Timer!
+    var showInterstitialInSecoundsEvery:Int! = 60
+    var count:Int = 60
+    var interstitialShownForFirstTime = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +44,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.loadWebView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.loadWebView), name:NSNotification.Name(rawValue: "RefreshSite"), object: nil)
+        
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if let secounds = appData?.value(forKey: "ShowInterstitialInSecoundsEvery") as? String {
+            self.showInterstitialInSecoundsEvery = Int(secounds)!
+            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewController.counterForInterstitialAd), userInfo: nil, repeats: true)
+        }
     }
     
     func showLoader() {
@@ -128,10 +139,33 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             self.interstitial.delegate = self
             self.interstitial.load(self.request)
         }
+        self.count = self.showInterstitialInSecoundsEvery
+    }
+    
+    func counterForInterstitialAd() {
+        if(self.interstitialShownForFirstTime == true && self.count > 0) {
+            self.count = self.count - 1
+            print("COUNTER FOR INTERSTITIAL AD: \(self.count)")
+        } else {
+            self.count = self.showInterstitialInSecoundsEvery
+            self.showInterstitialAd()
+        }
+    }
+    
+    func showInterstitialAd() {
+        if self.count == self.showInterstitialInSecoundsEvery {
+            if self.interstitial != nil && self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+                self.interstitialShownForFirstTime = true
+            } else {
+                self.loadBannerAd()
+            }
+        }
     }
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial!) {
         self.loadBannerAd()
+        self.loadInterstitalAd()
     }
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
@@ -179,12 +213,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             UserDefaults.standard.removeObject(forKey: "URL")
             
             if self.popViewController == nil {
-                if self.interstitial != nil && self.interstitial.isReady {
-                    self.interstitial.present(fromRootViewController: self)
-                } else {
-                    self.loadBannerAd()
-                }
-                
                 if self.wkWebView != nil {
                     self.view.addSubview(self.wkWebView!)
                 }
@@ -196,6 +224,9 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                 if self.bannerView != nil {
                     self.view.addSubview(self.bannerView!)
                 }
+                
+                self.showInterstitialAd()
+
             }
             
         }) { (success) in
