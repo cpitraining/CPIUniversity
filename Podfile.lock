@@ -35,6 +35,8 @@ PODS:
     - Mixpanel/Mixpanel (= 3.0.3)
   - Mixpanel/Mixpanel (3.0.3)
   - OneSignal (2.1.8)
+  - SwiftyStoreKit (0.5.1)
+  - SwiftyUserDefaults (3.0.0)
 
 DEPENDENCIES:
   - Firebase/AdMob
@@ -43,6 +45,8 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.0.0)
   - Mixpanel
   - OneSignal
+  - SwiftyStoreKit
+  - SwiftyUserDefaults
 
 SPEC CHECKSUMS:
   Firebase: 94e63112efcad75226c0356a8f3032397b8547c9
@@ -57,7 +61,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Mixpanel: 45867daeaa3c60f88072a3cb1b44e0b6c5cec009
   OneSignal: 233b844e2d6bd15bbae26dc4a50ea22614146128
+  SwiftyStoreKit: 53c63f91545a3778dc108f860a7414905ce40a63
+  SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: ff1bb00ed888e72f37ee108b93dc7f93853179ed
+PODFILE CHECKSUM: 0fea18114c15b8d2e18558af836d04b180c5464c
 
 COCOAPODS: 1.1.0.rc.2

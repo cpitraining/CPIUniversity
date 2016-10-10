@@ -11,6 +11,8 @@ import Firebase
 import FirebaseMessaging
 import FirebaseInstanceID
 import Mixpanel
+import SwiftyUserDefaults
+import SwiftyStoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -80,6 +82,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Mixpanel.sharedInstance().track("Mixpanel registered", properties: nil)
         } else {
             print("Mixpanel API Key is not in the plist file!")
+        }
+        
+        if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
+            SwiftyStoreKit.completeTransactions() { completedTransactions in
+                for completedTransaction in completedTransactions {
+                    if completedTransaction.transactionState == .purchased || completedTransaction.transactionState == .restored {
+                        print("purchased: \(completedTransaction.productId)")
+                        
+                        if completedTransaction.productId == productId {
+                            Defaults[.adsPurchased] = true
+                        }
+                    }
+                }
+            }
         }
         
         return true

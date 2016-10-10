@@ -10,6 +10,8 @@ import UIKit
 import WebKit
 import MBProgressHUD
 import GoogleMobileAds
+import SwiftyUserDefaults
+import SwiftyStoreKit
 
 class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate  {
     
@@ -19,6 +21,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     var toolbar:UIToolbar?
     var backButton: UIBarButtonItem?
     var forwardButton: UIBarButtonItem?
+    var iapButton: UIBarButtonItem?
     var reloadButton: UIBarButtonItem?
     
     var mainURL:URL?
@@ -133,13 +136,15 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
 
     func loadInterstitalAd() {
-        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if let interstitialId = appData?.value(forKey: "AdMobInterstitialUnitId") as? String {
-            self.interstitial = GADInterstitial(adUnitID: interstitialId)
-            self.interstitial.delegate = self
-            self.interstitial.load(self.request)
+        if Defaults[.adsPurchased] == false {
+            let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+            if let interstitialId = appData?.value(forKey: "AdMobInterstitialUnitId") as? String {
+                self.interstitial = GADInterstitial(adUnitID: interstitialId)
+                self.interstitial.delegate = self
+                self.interstitial.load(self.request)
+            }
+            self.count = self.showInterstitialInSecoundsEvery
         }
-        self.count = self.showInterstitialInSecoundsEvery
     }
     
     func counterForInterstitialAd() {
@@ -177,23 +182,25 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func loadBannerAd(){
-        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if let bannerId = appData?.value(forKey: "AdMobBannerUnitId") as? String {
-            let bounds = UIScreen.main.bounds
-
-            var y:CGFloat = bounds.height - 50
-            if self.toolbar != nil {
-                y = y - self.toolbar!.frame.height
+        if Defaults[.adsPurchased] == false {
+            let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+            if let bannerId = appData?.value(forKey: "AdMobBannerUnitId") as? String {
+                let bounds = UIScreen.main.bounds
+                
+                var y:CGFloat = bounds.height - 50
+                if self.toolbar != nil {
+                    y = y - self.toolbar!.frame.height
+                }
+                
+                self.bannerView = GADBannerView(frame: CGRect(x: 0, y: y, width: bounds.width, height: 50))
+                self.bannerView?.adUnitID = bannerId
+                self.bannerView?.rootViewController = self
+                self.bannerView?.load(self.request)
+                self.bannerView?.delegate = self
+            } else {
+                self.bannerView?.removeFromSuperview()
+                self.wkWebView?.frame = self.getFrame()
             }
-            
-            self.bannerView = GADBannerView(frame: CGRect(x: 0, y: y, width: bounds.width, height: 50))
-            self.bannerView?.adUnitID = bannerId
-            self.bannerView?.rootViewController = self
-            self.bannerView?.load(self.request)
-            self.bannerView?.delegate = self
-        } else {
-            self.bannerView?.removeFromSuperview()
-            self.wkWebView?.frame = self.getFrame()
         }
     }
     
@@ -369,11 +376,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             self.backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(ViewController.back))
             self.forwardButton = UIBarButtonItem(image: UIImage(named: "forward"), style: .plain, target: self, action: #selector(ViewController.forward))
             self.reloadButton = UIBarButtonItem(image: UIImage(named: "refresh"), style: .plain, target: self, action: #selector(ViewController.reload))
-            
+            self.iapButton = UIBarButtonItem(image: UIImage(named: "block-ad"), style: .plain, target: self, action: #selector(ViewController.removeAdsAction))
+
             self.backButton?.tintColor = UIColor(hexString: "0e8494")
             self.forwardButton?.tintColor = UIColor(hexString: "0e8494")
             self.reloadButton?.tintColor = UIColor(hexString: "0e8494")
-            
+            self.iapButton?.tintColor = UIColor(hexString: "0e8494")
+
             let fixedSpaceButton = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
             fixedSpaceButton.width = 42
             let flexibleSpaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -382,6 +391,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             items.append(self.backButton!)
             items.append(fixedSpaceButton)
             items.append(self.forwardButton!)
+            
+            if Defaults[.adsPurchased] == false {
+                items.append(flexibleSpaceButton)
+                items.append(self.iapButton!)
+            }
+            
             items.append(flexibleSpaceButton)
             items.append(self.reloadButton!)
             
@@ -390,6 +405,83 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             toolbar!.setItems(items, animated: true)
         }
         return toolbar
+    }
+    
+    func removeAdsAction() {
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
+            SwiftyStoreKit.retrieveProductsInfo([productId]) { result in
+                if let product = result.retrievedProducts.first {
+                    let numberFormatter = NumberFormatter()
+                    numberFormatter.locale = product.priceLocale
+                    numberFormatter.numberStyle = .currency
+                    let priceString = numberFormatter.string(from: product.price)
+                    print("Product: \(product.localizedDescription), price: \(priceString)")
+                    
+                    let alert = UIAlertController(title: "In-App Purchase", message: "Do you want to purchase \(product.localizedTitle) for \(priceString!)", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+                        
+                    }))
+                    alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { (action: UIAlertAction!) in
+                        self.purchase()
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                } else {
+                    print("Error: \(result.error)")
+                    
+                    let alert = UIAlertController(title: "In-App Purchase", message: "Product not found", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                        
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    func purchase() {
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
+            SwiftyStoreKit.purchaseProduct(productId) { result in
+                switch result {
+                case .success(let productId):
+                    print("Purchase Success: \(productId)")
+                    
+                    Defaults[.adsPurchased] = true
+                    self.timer.invalidate()
+                    self.timer = nil
+                    
+                    let alert = UIAlertController(title: "In-App Purchase", message: "Purchase successful!", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                        
+                        Defaults[.adsPurchased] = true
+                        self.timer.invalidate()
+                        self.timer = nil
+                        
+                        for view in self.view.subviews {
+                            if view is GADBannerView {
+                                view.removeFromSuperview()
+                            }
+                        }
+                        self.bannerView = nil
+
+                        self.loadBannerAd()
+                        
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                case .error(let error):
+                    print("Purchase Failed: \(error)")
+                    
+                    let alert = UIAlertController(title: "In-App Purchase", message: "Purchase Failed", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                        
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     func getDomainFromURL(_ url:URL?) -> String {
