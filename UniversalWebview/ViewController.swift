@@ -98,22 +98,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         if self.mainURL == nil {
             if urlString != nil {
                 self.mainURL = URL(string: urlString!)
-            } else {
-                self.mainURL = Bundle.main.url(forResource: "index", withExtension: "html")!
             }
         }
-        print(self.mainURL!)
     }
     
     func loadWebSite() {
-        // Create url request
-        let requestObj: URLRequest?
-        
-        if Reachability.isConnectedToNetwork() {
-            requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 0)
-        } else {
-            requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataDontLoad, timeoutInterval: 0)
-        }
         
         let theConfiguration:WKWebViewConfiguration? = WKWebViewConfiguration()
         let thisPref:WKPreferences = WKPreferences()
@@ -122,10 +111,63 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         theConfiguration!.preferences = thisPref;
 
         self.wkWebView = WKWebView(frame: self.getFrame(), configuration: theConfiguration!)
-        _ = self.wkWebView?.load(requestObj!)
+        if self.mainURL != nil {
+            // Create url request
+            let requestObj: URLRequest?
+            
+            if Reachability.isConnectedToNetwork() {
+                requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 0)
+            } else {
+                requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataDontLoad, timeoutInterval: 0)
+            }
+            _ = self.wkWebView?.load(requestObj!)
+        } else {
+            var fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "index", ofType: "html")!)
+
+            if #available(iOS 9.0, *) {
+                // iOS9 and above. One year later things are OK.
+                _ = self.wkWebView?.loadFileURL(fileURL, allowingReadAccessTo: fileURL)
+            } else {
+                // iOS8. Things can (sometimes) be workaround-ed
+                //   Brave people can do just this
+                //   fileURL = try! pathForBuggyWKWebView8(fileURL: fileURL)
+                //   webView.load(URLRequest(url: fileURL))
+                do {
+                    fileURL = try fileURLForBuggyWKWebView8(fileURL: fileURL)
+                    _ = self.wkWebView?.load(URLRequest(url: fileURL))
+                } catch let error as NSError {
+                    print("Error: " + error.debugDescription)
+                }
+            }
+        }
+        
         self.wkWebView?.navigationDelegate = self
         self.wkWebView?.uiDelegate = self
         self.wkWebView?.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
+    }
+    
+    func fileURLForBuggyWKWebView8(fileURL: URL) throws -> URL {
+        // Some safety checks
+        if !fileURL.isFileURL {
+            throw NSError(
+                domain: "BuggyWKWebViewDomain",
+                code: 1001,
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("URL must be a file URL.", comment:"")])
+        }
+        _ = try! fileURL.checkResourceIsReachable()
+        
+        // Create "/temp/www" directory
+        let fm = FileManager.default
+        let tmpDirURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("www")
+        try! fm.createDirectory(at: tmpDirURL, withIntermediateDirectories: true, attributes: nil)
+        
+        // Now copy given file to the temp directory
+        let dstURL = tmpDirURL.appendingPathComponent(fileURL.lastPathComponent)
+        let _ = try? fm.removeItem(at: dstURL)
+        try! fm.copyItem(at: fileURL, to: dstURL)
+        
+        // Files in "/temp/www" load flawlesly :)
+        return dstURL
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -256,12 +298,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func dismissPopViewController(_ domain:String) {
-        let mainDomain = self.getDomainFromURL(self.mainURL!)
-        if domain == mainDomain{
-            if self.popViewController != nil {
-                self.dismissViewController()
-            }
-        }
+//        let mainDomain = self.getDomainFromURL(self.mainURL!)
+//        if domain == mainDomain{
+//            if self.popViewController != nil {
+//                self.dismissViewController()
+//            }
+//        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -308,7 +350,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         print("NAVIGATION URL: \(navigationAction.request.url!.host)")
-        print("MAIN URL: \(self.mainURL!.host)")
 
         let domain = self.getDomainFromURL(navigationAction.request.url!)
         
