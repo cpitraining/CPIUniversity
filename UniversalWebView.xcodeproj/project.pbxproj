@@ -1,424 +1,933 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		C63DB714F099553E014BB5E6 /* Pods_UniversalWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */; };
-		CD479A6F1D7DAD160076BFCE /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */; };
-		CD6A99E11D5B1BAA00E25A08 /* UniversalWebView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */; };
-		CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */; };
-		CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */; };
-		CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */; };
-		CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99F51D5B1E3500E25A08 /* Main.storyboard */; };
-		CD71C20C1D62FC0000C5EFFA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = CD71C20B1D62FC0000C5EFFA /* index.html */; };
-		CD7BB3951D7D886800A8C565 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BB3941D7D886800A8C565 /* Reachability.swift */; };
-		CD7BF2EE1DAB893A00212FC2 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BF2ED1DAB893A00212FC2 /* DefaultsKeys.swift */; };
-		CD999E1C1D95478F009AF731 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */; };
-		CDBE24E31D800D52007B9363 /* domains.json in Resources */ = {isa = PBXBuildFile; fileRef = CDBE24E21D800D52007B9363 /* domains.json */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXFileReference section */
-		5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalWebView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.debug.xcconfig"; sourceTree = "<group>"; };
-		98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalWebView.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.release.xcconfig"; sourceTree = "<group>"; };
-		CD27E1DE1D65EFE700EBE817 /* UniversalWebView-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UniversalWebView-Bridging-Header.h"; sourceTree = "<group>"; };
-		CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		CD6A99CB1D5B1B8600E25A08 /* UniversalWebView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniversalWebView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = UniversalWebView.plist; path = UniversalWebView/UniversalWebView.plist; sourceTree = "<group>"; };
-		CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CD6A99EB1D5B1C1800E25A08 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CD6A99F51D5B1E3500E25A08 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		CD71C20B1D62FC0000C5EFFA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		CD7BB3941D7D886800A8C565 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		CD7BF2ED1DAB893A00212FC2 /* DefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
-		CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		CDBE24E21D800D52007B9363 /* domains.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = domains.json; sourceTree = "<group>"; };
-		CDC4D5121D8BDFE4009DFDD5 /* UniversalWebView.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UniversalWebView.entitlements; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		CD6A99C81D5B1B8600E25A08 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C63DB714F099553E014BB5E6 /* Pods_UniversalWebView.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		53BAC04DEB3107035ECE5DA7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */,
-				98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		6E4D7A0EBC02878DD491126D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5F96C4EF6051EA764D19FFA4 /* Pods_UniversalWebView.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CD6A99C21D5B1B8600E25A08 = {
-			isa = PBXGroup;
-			children = (
-				CD6A99E01D5B1BAA00E25A08 /* UniversalWebView.plist */,
-				CD6A99CD1D5B1B8600E25A08 /* UniversalWebView */,
-				CD6A99CC1D5B1B8600E25A08 /* Products */,
-				53BAC04DEB3107035ECE5DA7 /* Pods */,
-				6E4D7A0EBC02878DD491126D /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		CD6A99CC1D5B1B8600E25A08 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CD6A99CB1D5B1B8600E25A08 /* UniversalWebView.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		CD6A99CD1D5B1B8600E25A08 /* UniversalWebView */ = {
-			isa = PBXGroup;
-			children = (
-				CDC4D5121D8BDFE4009DFDD5 /* UniversalWebView.entitlements */,
-				CD71C20A1D62FC0000C5EFFA /* web_content */,
-				CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */,
-				CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */,
-				CD7BB3941D7D886800A8C565 /* Reachability.swift */,
-				CD7BF2ED1DAB893A00212FC2 /* DefaultsKeys.swift */,
-				CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */,
-				CDBE24E21D800D52007B9363 /* domains.json */,
-				CD6A99F51D5B1E3500E25A08 /* Main.storyboard */,
-				CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */,
-				CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */,
-				CD6A99EB1D5B1C1800E25A08 /* Info.plist */,
-				CD27E1DE1D65EFE700EBE817 /* UniversalWebView-Bridging-Header.h */,
-			);
-			path = UniversalWebView;
-			sourceTree = "<group>";
-		};
-		CD71C20A1D62FC0000C5EFFA /* web_content */ = {
-			isa = PBXGroup;
-			children = (
-				CD71C20B1D62FC0000C5EFFA /* index.html */,
-			);
-			path = web_content;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		CD6A99CA1D5B1B8600E25A08 /* UniversalWebView */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CD6A99DD1D5B1B8600E25A08 /* Build configuration list for PBXNativeTarget "UniversalWebView" */;
-			buildPhases = (
-				1698D11F799CB576D5539D0A /* [CP] Check Pods Manifest.lock */,
-				CD6A99C71D5B1B8600E25A08 /* Sources */,
-				CD6A99C81D5B1B8600E25A08 /* Frameworks */,
-				CD6A99C91D5B1B8600E25A08 /* Resources */,
-				DB65B082F3B06527E81C52ED /* [CP] Embed Pods Frameworks */,
-				EB6C43668B1D0879C7DAE97C /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = UniversalWebView;
-			productName = UniversalWebView;
-			productReference = CD6A99CB1D5B1B8600E25A08 /* UniversalWebView.app */;
-			productType = "com.apple.product-type.application";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		CD6A99C31D5B1B8600E25A08 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
-				ORGANIZATIONNAME = "Brommko LLC";
-				TargetAttributes = {
-					CD6A99CA1D5B1B8600E25A08 = {
-						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 56XX2LQCB2;
-						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.Push = {
-								enabled = 1;
-							};
-							com.apple.SafariKeychain = {
-								enabled = 0;
-							};
-						};
-					};
-				};
-			};
-			buildConfigurationList = CD6A99C61D5B1B8600E25A08 /* Build configuration list for PBXProject "UniversalWebView" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = CD6A99C21D5B1B8600E25A08;
-			productRefGroup = CD6A99CC1D5B1B8600E25A08 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				CD6A99CA1D5B1B8600E25A08 /* UniversalWebView */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		CD6A99C91D5B1B8600E25A08 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CD999E1C1D95478F009AF731 /* Launch Screen.storyboard in Resources */,
-				CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */,
-				CD71C20C1D62FC0000C5EFFA /* index.html in Resources */,
-				CDBE24E31D800D52007B9363 /* domains.json in Resources */,
-				CD6A99E11D5B1BAA00E25A08 /* UniversalWebView.plist in Resources */,
-				CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1698D11F799CB576D5539D0A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		DB65B082F3B06527E81C52ED /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EB6C43668B1D0879C7DAE97C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		CD6A99C71D5B1B8600E25A08 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CD7BF2EE1DAB893A00212FC2 /* DefaultsKeys.swift in Sources */,
-				CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */,
-				CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */,
-				CD7BB3951D7D886800A8C565 /* Reachability.swift in Sources */,
-				CD479A6F1D7DAD160076BFCE /* UIColorExtension.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin XCBuildConfiguration section */
-		CD6A99DB1D5B1B8600E25A08 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		CD6A99DC1D5B1B8600E25A08 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		CD6A99DE1D5B1B8600E25A08 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E98A9E7360A1D0D3EBB46F0 /* Pods-UniversalWebView.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = UniversalWebView/UniversalWebView.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 56XX2LQCB2;
-				INFOPLIST_FILE = UniversalWebView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bommko.UniversalWebView;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "UniversalWebView/UniversalWebView-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		CD6A99DF1D5B1B8600E25A08 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98C1CBE83E77A3874C238F15 /* Pods-UniversalWebView.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = UniversalWebView/UniversalWebView.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 56XX2LQCB2;
-				INFOPLIST_FILE = UniversalWebView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bommko.UniversalWebView;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "UniversalWebView/UniversalWebView-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		CD6A99C61D5B1B8600E25A08 /* Build configuration list for PBXProject "UniversalWebView" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CD6A99DB1D5B1B8600E25A08 /* Debug */,
-				CD6A99DC1D5B1B8600E25A08 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CD6A99DD1D5B1B8600E25A08 /* Build configuration list for PBXNativeTarget "UniversalWebView" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CD6A99DE1D5B1B8600E25A08 /* Debug */,
-				CD6A99DF1D5B1B8600E25A08 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = CD6A99C31D5B1B8600E25A08 /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>1698D11F799CB576D5539D0A</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>53BAC04DEB3107035ECE5DA7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7E98A9E7360A1D0D3EBB46F0</string>
+				<string>98C1CBE83E77A3874C238F15</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5F96C4EF6051EA764D19FFA4</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods_UniversalWebView.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>6E4D7A0EBC02878DD491126D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>5F96C4EF6051EA764D19FFA4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7E98A9E7360A1D0D3EBB46F0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-UniversalWebView.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>98C1CBE83E77A3874C238F15</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-UniversalWebView.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C63DB714F099553E014BB5E6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5F96C4EF6051EA764D19FFA4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD27E1DE1D65EFE700EBE817</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>UniversalWebView-Bridging-Header.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD479A6E1D7DAD160076BFCE</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>UIColorExtension.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD479A6F1D7DAD160076BFCE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD479A6E1D7DAD160076BFCE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD6A99C21D5B1B8600E25A08</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>CD6A99E01D5B1BAA00E25A08</string>
+				<string>CD6A99CD1D5B1B8600E25A08</string>
+				<string>CD6A99CC1D5B1B8600E25A08</string>
+				<string>53BAC04DEB3107035ECE5DA7</string>
+				<string>6E4D7A0EBC02878DD491126D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99C31D5B1B8600E25A08</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0730</string>
+				<key>LastUpgradeCheck</key>
+				<string>0800</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>Brommko LLC</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>CD6A99CA1D5B1B8600E25A08</key>
+					<dict>
+						<key>CreatedOnToolsVersion</key>
+						<string>7.3</string>
+						<key>DevelopmentTeam</key>
+						<string>56XX2LQCB2</string>
+						<key>LastSwiftMigration</key>
+						<string>0800</string>
+						<key>ProvisioningStyle</key>
+						<string>Automatic</string>
+						<key>SystemCapabilities</key>
+						<dict>
+							<key>com.apple.Push</key>
+							<dict>
+								<key>enabled</key>
+								<string>1</string>
+							</dict>
+							<key>com.apple.SafariKeychain</key>
+							<dict>
+								<key>enabled</key>
+								<string>0</string>
+							</dict>
+						</dict>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>CD6A99C61D5B1B8600E25A08</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+				<string>Base</string>
+			</array>
+			<key>mainGroup</key>
+			<string>CD6A99C21D5B1B8600E25A08</string>
+			<key>productRefGroup</key>
+			<string>CD6A99CC1D5B1B8600E25A08</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>CD6A99CA1D5B1B8600E25A08</string>
+			</array>
+		</dict>
+		<key>CD6A99C61D5B1B8600E25A08</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>CD6A99DB1D5B1B8600E25A08</string>
+				<string>CD6A99DC1D5B1B8600E25A08</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>CD6A99C71D5B1B8600E25A08</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>CD7BF2EE1DAB893A00212FC2</string>
+				<string>CD6A99EF1D5B1CE100E25A08</string>
+				<string>CD6A99F01D5B1CE100E25A08</string>
+				<string>CD7BB3951D7D886800A8C565</string>
+				<string>CD479A6F1D7DAD160076BFCE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>CD6A99C81D5B1B8600E25A08</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>C63DB714F099553E014BB5E6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>CD6A99C91D5B1B8600E25A08</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>CD999E1C1D95478F009AF731</string>
+				<string>CD6A99EA1D5B1BFA00E25A08</string>
+				<string>CD71C20C1D62FC0000C5EFFA</string>
+				<string>CDBE24E31D800D52007B9363</string>
+				<string>CD6A99E11D5B1BAA00E25A08</string>
+				<string>CD6A99F61D5B1E3500E25A08</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>CD6A99CA1D5B1B8600E25A08</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>CD6A99DD1D5B1B8600E25A08</string>
+			<key>buildPhases</key>
+			<array>
+				<string>1698D11F799CB576D5539D0A</string>
+				<string>CD6A99C71D5B1B8600E25A08</string>
+				<string>CD6A99C81D5B1B8600E25A08</string>
+				<string>CD6A99C91D5B1B8600E25A08</string>
+				<string>DB65B082F3B06527E81C52ED</string>
+				<string>EB6C43668B1D0879C7DAE97C</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>UniversalWebView</string>
+			<key>productName</key>
+			<string>UniversalWebView</string>
+			<key>productReference</key>
+			<string>CD6A99CB1D5B1B8600E25A08</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>CD6A99CB1D5B1B8600E25A08</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>UniversalWebView.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>CD6A99CC1D5B1B8600E25A08</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>CD6A99CB1D5B1B8600E25A08</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99CD1D5B1B8600E25A08</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>CDC4D5121D8BDFE4009DFDD5</string>
+				<string>CD71C20A1D62FC0000C5EFFA</string>
+				<string>CD6A99ED1D5B1CE100E25A08</string>
+				<string>CD6A99EE1D5B1CE100E25A08</string>
+				<string>CD7BB3941D7D886800A8C565</string>
+				<string>CD7BF2ED1DAB893A00212FC2</string>
+				<string>CD479A6E1D7DAD160076BFCE</string>
+				<string>CDBE24E21D800D52007B9363</string>
+				<string>CD6A99F51D5B1E3500E25A08</string>
+				<string>CD999E1B1D95478F009AF731</string>
+				<string>CD6A99E91D5B1BFA00E25A08</string>
+				<string>CD6A99EB1D5B1C1800E25A08</string>
+				<string>CD27E1DE1D65EFE700EBE817</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>UniversalWebView</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99DB1D5B1B8600E25A08</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INFINITE_RECURSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>ENABLE_TESTABILITY</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.3</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>CD6A99DC1D5B1B8600E25A08</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INFINITE_RECURSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.3</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Owholemodule</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>CD6A99DD1D5B1B8600E25A08</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>CD6A99DE1D5B1B8600E25A08</string>
+				<string>CD6A99DF1D5B1B8600E25A08</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>CD6A99DE1D5B1B8600E25A08</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>7E98A9E7360A1D0D3EBB46F0</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
+				<string>$(inherited)</string>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>CODE_SIGN_ENTITLEMENTS</key>
+				<string>UniversalWebView/UniversalWebView.entitlements</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>56XX2LQCB2</string>
+				<key>INFOPLIST_FILE</key>
+				<string>UniversalWebView/Info.plist</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.bommko.UniversalWebView</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string></string>
+				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
+				<string>UniversalWebView/UniversalWebView-Bridging-Header.h</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>CD6A99DF1D5B1B8600E25A08</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>98C1CBE83E77A3874C238F15</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
+				<string>$(inherited)</string>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>CODE_SIGN_ENTITLEMENTS</key>
+				<string>UniversalWebView/UniversalWebView.entitlements</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>56XX2LQCB2</string>
+				<key>INFOPLIST_FILE</key>
+				<string>UniversalWebView/Info.plist</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<string>$(inherited) @executable_path/Frameworks</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>com.bommko.UniversalWebView</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PROVISIONING_PROFILE</key>
+				<string></string>
+				<key>SWIFT_OBJC_BRIDGING_HEADER</key>
+				<string>UniversalWebView/UniversalWebView-Bridging-Header.h</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>CD6A99E01D5B1BAA00E25A08</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>name</key>
+			<string>UniversalWebView.plist</string>
+			<key>path</key>
+			<string>UniversalWebView/UniversalWebView.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99E11D5B1BAA00E25A08</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD6A99E01D5B1BAA00E25A08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD6A99E91D5B1BFA00E25A08</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Images.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99EA1D5B1BFA00E25A08</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD6A99E91D5B1BFA00E25A08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD6A99EB1D5B1C1800E25A08</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99ED1D5B1CE100E25A08</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>AppDelegate.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99EE1D5B1CE100E25A08</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>ViewController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99EF1D5B1CE100E25A08</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD6A99ED1D5B1CE100E25A08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD6A99F01D5B1CE100E25A08</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD6A99EE1D5B1CE100E25A08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD6A99F51D5B1E3500E25A08</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>path</key>
+			<string>Main.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD6A99F61D5B1E3500E25A08</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD6A99F51D5B1E3500E25A08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD71C20A1D62FC0000C5EFFA</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>CD71C20B1D62FC0000C5EFFA</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>web_content</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD71C20B1D62FC0000C5EFFA</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.html</string>
+			<key>path</key>
+			<string>index.html</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD71C20C1D62FC0000C5EFFA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD71C20B1D62FC0000C5EFFA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD7BB3941D7D886800A8C565</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>Reachability.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD7BB3951D7D886800A8C565</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD7BB3941D7D886800A8C565</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD7BF2ED1DAB893A00212FC2</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>path</key>
+			<string>DefaultsKeys.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD7BF2EE1DAB893A00212FC2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD7BF2ED1DAB893A00212FC2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CD999E1B1D95478F009AF731</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.storyboard</string>
+			<key>path</key>
+			<string>Launch Screen.storyboard</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CD999E1C1D95478F009AF731</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CD999E1B1D95478F009AF731</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CDBE24E21D800D52007B9363</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.json</string>
+			<key>path</key>
+			<string>domains.json</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CDBE24E31D800D52007B9363</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CDBE24E21D800D52007B9363</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CDC4D5121D8BDFE4009DFDD5</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.entitlements</string>
+			<key>path</key>
+			<string>UniversalWebView.entitlements</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DB65B082F3B06527E81C52ED</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Embed Pods Frameworks</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView-frameworks.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>EB6C43668B1D0879C7DAE97C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-UniversalWebView/Pods-UniversalWebView-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>CD6A99C31D5B1B8600E25A08</string>
+</dict>
+</plist>
