@@ -234,7 +234,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                     y = y - self.toolbar!.frame.height
                 }
                 
-                self.bannerView = GADBannerView(frame: CGRect(x: 0, y: y, width: bounds.width, height: 50))
+                self.bannerView = GADBannerView(frame: CGRect(x: (bounds.width - 320) / 2, y: y, width: 320, height: 50))
                 self.bannerView?.adUnitID = bannerId
                 self.bannerView?.rootViewController = self
                 self.bannerView?.load(self.request)
@@ -461,8 +461,38 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         // Dispose of any resources that can be recreated.
     }
     
+    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        UIView.transition(with: self.view, duration: 0.1, options: .transitionCrossDissolve, animations: {
+            for view in self.view.subviews {
+                if view is GADBannerView {
+                    view.removeFromSuperview()
+                }
+            }
+            self.bannerView = nil
+            self.loadBannerAd()
+        }) { (success) in
+            
+        }
+    }
+    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        self.wkWebView?.frame = self.getFrame()
+        UIView.transition(with: self.view, duration: 0.1, options: .transitionCrossDissolve, animations: {
+            let bounds = UIScreen.main.bounds
+            self.toolbar?.frame = CGRect(x: 0, y: bounds.height - 40, width: bounds.width, height: 40)
+            
+            var y:CGFloat = bounds.height - 50
+            if self.toolbar != nil {
+                y = y - self.toolbar!.frame.height
+            }
+            
+            if self.bannerView != nil {
+                self.view.addSubview(self.bannerView!)
+            }
+            self.bannerView?.frame = CGRect(x: (bounds.width - 320) / 2, y: y, width: 320, height: 50)
+            self.wkWebView?.frame = self.getFrame()
+        }) { (success) in
+
+        }
     }
     
     func getFrame() -> CGRect {
