@@ -17,7 +17,7 @@
                BlueprintIdentifier = "CD6A99CA1D5B1B8600E25A08"
                BuildableName = "UniversalWebView.app"
                BlueprintName = "UniversalWebView"
-               ReferencedContainer = "container:UniversalWebView.xcodeproj">
+               ReferencedContainer = "container:Universal WebView.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "CD6A99CA1D5B1B8600E25A08"
             BuildableName = "UniversalWebView.app"
             BlueprintName = "UniversalWebView"
-            ReferencedContainer = "container:UniversalWebView.xcodeproj">
+            ReferencedContainer = "container:Universal WebView.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "CD6A99CA1D5B1B8600E25A08"
             BuildableName = "UniversalWebView.app"
             BlueprintName = "UniversalWebView"
-            ReferencedContainer = "container:UniversalWebView.xcodeproj">
+            ReferencedContainer = "container:Universal WebView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "CD6A99CA1D5B1B8600E25A08"
             BuildableName = "UniversalWebView.app"
             BlueprintName = "UniversalWebView"
-            ReferencedContainer = "container:UniversalWebView.xcodeproj">
+            ReferencedContainer = "container:Universal WebView.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -98,22 +98,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         if self.mainURL == nil {
             if urlString != nil {
                 self.mainURL = URL(string: urlString!)
-            } else {
-                self.mainURL = Bundle.main.url(forResource: "index", withExtension: "html")!
             }
         }
-        print(self.mainURL!)
     }
     
     func loadWebSite() {
-        // Create url request
-        let requestObj: URLRequest?
-        
-        if Reachability.isConnectedToNetwork() {
-            requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 0)
-        } else {
-            requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataDontLoad, timeoutInterval: 0)
-        }
         
         let theConfiguration:WKWebViewConfiguration? = WKWebViewConfiguration()
         let thisPref:WKPreferences = WKPreferences()
@@ -122,10 +111,63 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         theConfiguration!.preferences = thisPref;
 
         self.wkWebView = WKWebView(frame: self.getFrame(), configuration: theConfiguration!)
-        _ = self.wkWebView?.load(requestObj!)
+        if self.mainURL != nil {
+            // Create url request
+            let requestObj: URLRequest?
+            
+            if Reachability.isConnectedToNetwork() {
+                requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 0)
+            } else {
+                requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataDontLoad, timeoutInterval: 0)
+            }
+            _ = self.wkWebView?.load(requestObj!)
+        } else {
+            var fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "www/index", ofType: "html")!)
+
+            if #available(iOS 9.0, *) {
+                // iOS9 and above. One year later things are OK.
+                _ = self.wkWebView?.loadFileURL(fileURL, allowingReadAccessTo: fileURL)
+            } else {
+                // iOS8. Things can (sometimes) be workaround-ed
+                //   Brave people can do just this
+                //   fileURL = try! pathForBuggyWKWebView8(fileURL: fileURL)
+                //   webView.load(URLRequest(url: fileURL))
+                do {
+                    fileURL = try fileURLForBuggyWKWebView8(fileURL: fileURL)
+                    _ = self.wkWebView?.load(URLRequest(url: fileURL))
+                } catch let error as NSError {
+                    print("Error: " + error.debugDescription)
+                }
+            }
+        }
+        
         self.wkWebView?.navigationDelegate = self
         self.wkWebView?.uiDelegate = self
         self.wkWebView?.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
+    }
+    
+    func fileURLForBuggyWKWebView8(fileURL: URL) throws -> URL {
+        // Some safety checks
+        if !fileURL.isFileURL {
+            throw NSError(
+                domain: "BuggyWKWebViewDomain",
+                code: 1001,
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("URL must be a file URL.", comment:"")])
+        }
+        _ = try! fileURL.checkResourceIsReachable()
+        
+        // Create "/temp/www" directory
+        let fm = FileManager.default
+        let tmpDirURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("www")
+        try! fm.createDirectory(at: tmpDirURL, withIntermediateDirectories: true, attributes: nil)
+        
+        // Now copy given file to the temp directory
+        let dstURL = tmpDirURL.appendingPathComponent(fileURL.lastPathComponent)
+        let _ = try? fm.removeItem(at: dstURL)
+        try! fm.copyItem(at: fileURL, to: dstURL)
+        
+        // Files in "/temp/www" load flawlesly :)
+        return dstURL
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -192,7 +234,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                     y = y - self.toolbar!.frame.height
                 }
                 
-                self.bannerView = GADBannerView(frame: CGRect(x: 0, y: y, width: bounds.width, height: 50))
+                self.bannerView = GADBannerView(frame: CGRect(x: (bounds.width - 320) / 2, y: y, width: 320, height: 50))
                 self.bannerView?.adUnitID = bannerId
                 self.bannerView?.rootViewController = self
                 self.bannerView?.load(self.request)
@@ -256,12 +298,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func dismissPopViewController(_ domain:String) {
-        let mainDomain = self.getDomainFromURL(self.mainURL!)
-        if domain == mainDomain{
-            if self.popViewController != nil {
-                self.dismissViewController()
-            }
-        }
+//        let mainDomain = self.getDomainFromURL(self.mainURL!)
+//        if domain == mainDomain{
+//            if self.popViewController != nil {
+//                self.dismissViewController()
+//            }
+//        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -308,7 +350,60 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         print("NAVIGATION URL: \(navigationAction.request.url!.host)")
-        print("MAIN URL: \(self.mainURL!.host)")
+        
+        let url = navigationAction.request.url?.absoluteString
+        
+        let hostAddress = navigationAction.request.url?.host
+        
+        // To connnect app store
+        if hostAddress == "itunes.apple.com" {
+            if UIApplication.shared.canOpenURL(navigationAction.request.url!) {
+                UIApplication.shared.openURL(navigationAction.request.url!)
+                decisionHandler(.cancel)
+                return
+            }
+        }
+        
+        
+        #if DEBUG
+            print("url = \(url), host = \(hostAddress)")
+        #endif
+        
+        let url_elements = url!.components(separatedBy: ":")
+        
+        switch url_elements[0] {
+        case "tel":
+            #if DEBUG
+                print("this is phone number")
+            #endif
+            openCustomApp(urlScheme: "telprompt://", additional_info: url_elements[1])
+            decisionHandler(.cancel)
+            
+        case "sms":
+            #if DEBUG
+                print("this is sms")
+            #endif
+            openCustomApp(urlScheme: "sms://", additional_info: url_elements[1])
+            decisionHandler(.cancel)
+            
+        case "mailto":
+            #if DEBUG
+                print("this is mail")
+            #endif
+            openCustomApp(urlScheme: "mailto://", additional_info: url_elements[1])
+            decisionHandler(.cancel)
+            
+        case "comgooglemaps":
+            #if DEBUG
+                print("this is sms")
+            #endif
+            openCustomApp(urlScheme: "comgooglemaps://", additional_info: url_elements[1])
+            decisionHandler(.cancel)
+        default:
+            #if DEBUG
+                print("normal http request")
+            #endif
+        }
 
         let domain = self.getDomainFromURL(navigationAction.request.url!)
         
@@ -337,6 +432,22 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         }
     }
     
+    /**
+     open custom app with urlScheme : telprompt, sms, mailto
+     
+     - parameter urlScheme: telpromt, sms, mailto
+     - parameter additional_info: additional info related to urlScheme
+     */
+    func openCustomApp(urlScheme:String, additional_info:String){
+        let url = "\(urlScheme)"+"\(additional_info)"
+        if let requestUrl:NSURL = NSURL(string:url) {
+            let application:UIApplication = UIApplication.shared
+            if application.canOpenURL(requestUrl as URL) {
+                application.openURL(requestUrl as URL)
+            }
+        }
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         decisionHandler(.allow);
     }
@@ -350,8 +461,38 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         // Dispose of any resources that can be recreated.
     }
     
+    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        UIView.transition(with: self.view, duration: 0.1, options: .transitionCrossDissolve, animations: {
+            for view in self.view.subviews {
+                if view is GADBannerView {
+                    view.removeFromSuperview()
+                }
+            }
+            self.bannerView = nil
+            self.loadBannerAd()
+        }) { (success) in
+            
+        }
+    }
+    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        self.wkWebView?.frame = self.getFrame()
+        UIView.transition(with: self.view, duration: 0.1, options: .transitionCrossDissolve, animations: {
+            let bounds = UIScreen.main.bounds
+            self.toolbar?.frame = CGRect(x: 0, y: bounds.height - 40, width: bounds.width, height: 40)
+            
+            var y:CGFloat = bounds.height - 50
+            if self.toolbar != nil {
+                y = y - self.toolbar!.frame.height
+            }
+            
+            if self.bannerView != nil {
+                self.view.addSubview(self.bannerView!)
+            }
+            self.bannerView?.frame = CGRect(x: (bounds.width - 320) / 2, y: y, width: 320, height: 50)
+            self.wkWebView?.frame = self.getFrame()
+        }) { (success) in
+
+        }
     }
     
     func getFrame() -> CGRect {
