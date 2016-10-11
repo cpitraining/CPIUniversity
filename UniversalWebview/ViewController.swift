@@ -200,7 +200,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func showInterstitialAd() {
-        if self.count == self.showInterstitialInSecoundsEvery {
+        if self.interstitialShownForFirstTime == true && self.count == self.showInterstitialInSecoundsEvery {
             if self.interstitial != nil && self.interstitial.isReady {
                 self.interstitial.present(fromRootViewController: self)
                 self.interstitialShownForFirstTime = true
@@ -264,6 +264,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             if self.popViewController == nil {
                 if self.wkWebView != nil {
                     self.view.addSubview(self.wkWebView!)
+                    self.interstitialShownForFirstTime = true
                 }
                 
                 if self.toolbar != nil {
