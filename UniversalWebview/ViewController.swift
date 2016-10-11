@@ -31,7 +31,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     var interstitial: GADInterstitial!
     let request = GADRequest()
     
-    var timer:Timer!
+    var timer:Timer?
     var showInterstitialInSecoundsEvery:Int! = 60
     var count:Int = 60
     var interstitialShownForFirstTime = false
@@ -574,7 +574,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                     
                     let alert = UIAlertController(title: "In-App Purchase", message: "Product not found", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-                        
+
                     }))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -591,25 +591,38 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                     print("Purchase Success: \(productId)")
                     
                     Defaults[.adsPurchased] = true
-                    self.timer.invalidate()
+                    self.timer?.invalidate()
                     self.timer = nil
                     
                     let alert = UIAlertController(title: "In-App Purchase", message: "Purchase successful!", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-                        
                         Defaults[.adsPurchased] = true
-                        self.timer.invalidate()
+                        
+                        self.timer?.invalidate()
                         self.timer = nil
                         
-                        for view in self.view.subviews {
-                            if view is GADBannerView {
-                                view.removeFromSuperview()
+                        UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                            for view in self.view.subviews {
+                                if view is GADBannerView {
+                                    view.removeFromSuperview()
+                                }
                             }
+                            self.bannerView = nil
+                            
+                            if self.toolbar != nil {
+                                var buttons = self.toolbar!.items!
+                                for button in self.toolbar!.items! {
+                                    if button == self.iapButton {
+                                        buttons.remove(at: buttons.index(of: button)!)
+                                        self.toolbar?.setItems(buttons, animated: true)
+                                    }
+                                }
+                            }
+                            
+                            self.wkWebView?.frame = self.getFrame()
+                        }) { (success) in
+                            
                         }
-                        self.bannerView = nil
-
-                        self.loadBannerAd()
-                        
                     }))
                     self.present(alert, animated: true, completion: nil)
                     
