@@ -64,34 +64,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         if let oneSignalAppID = appData?.value(forKey: "OneSignalAppID") as? String {
-            OneSignal.initWithLaunchOptions(launchOptions, appId: oneSignalAppID, handleNotificationAction: nil, settings:
-                [kOSSettingsKeyInAppAlerts: false,
-                 kOSSettingsKeyAutoPrompt: false,
-                 kOSSettingsKeyInAppLaunchURL: false
-                ])
-            print("OneSignal registered!")
+            if !oneSignalAppID.isEmpty {
+                OneSignal.initWithLaunchOptions(launchOptions, appId: oneSignalAppID, handleNotificationAction: nil, settings:
+                    [kOSSettingsKeyInAppAlerts: false,
+                     kOSSettingsKeyAutoPrompt: false,
+                     kOSSettingsKeyInAppLaunchURL: false
+                    ])
+                print("OneSignal registered!")
+            }
         } else {
             print("OneSignal API Key is not in the plist file!")
         }
         
         if let mixpanelToken = appData?.value(forKey: "MixpanelToken") as? String {
-            let mixpanel = Mixpanel.sharedInstance(withToken: mixpanelToken)
-            mixpanel.identify(mixpanel.distinctId)
-            print("Mixpanel registered!")
-            
-            Mixpanel.sharedInstance().track("Mixpanel registered", properties: nil)
+            if !mixpanelToken.isEmpty {
+                let mixpanel = Mixpanel.sharedInstance(withToken: mixpanelToken)
+                mixpanel.identify(mixpanel.distinctId)
+                print("Mixpanel registered!")
+                
+                Mixpanel.sharedInstance().track("Mixpanel registered", properties: nil)
+            }
         } else {
             print("Mixpanel API Key is not in the plist file!")
         }
         
         if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
-            SwiftyStoreKit.completeTransactions() { completedTransactions in
-                for completedTransaction in completedTransactions {
-                    if completedTransaction.transactionState == .purchased || completedTransaction.transactionState == .restored {
-                        print("purchased: \(completedTransaction.productId)")
-                        
-                        if completedTransaction.productId == productId {
-                            Defaults[.adsPurchased] = true
+            if !productId.isEmpty {
+                SwiftyStoreKit.completeTransactions() { completedTransactions in
+                    for completedTransaction in completedTransactions {
+                        if completedTransaction.transactionState == .purchased || completedTransaction.transactionState == .restored {
+                            print("purchased: \(completedTransaction.productId)")
+                            
+                            if completedTransaction.productId == productId {
+                                Defaults[.adsPurchased] = true
+                            }
                         }
                     }
                 }
@@ -129,8 +135,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if appData?.value(forKey: "MixpanelToken") != nil {
-            Mixpanel.sharedInstance().people.addPushDeviceToken(deviceToken)
+        if let mixpanelToken = appData?.value(forKey: "MixpanelToken") as? String {
+            if !mixpanelToken.isEmpty {
+                Mixpanel.sharedInstance().people.addPushDeviceToken(deviceToken)
+            }
         }
     }
     

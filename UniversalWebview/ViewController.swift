@@ -50,8 +50,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         if let secounds = appData?.value(forKey: "ShowInterstitialInSecoundsEvery") as? String {
-            self.showInterstitialInSecoundsEvery = Int(secounds)!
-            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewController.counterForInterstitialAd), userInfo: nil, repeats: true)
+            if !secounds.isEmpty {
+                self.showInterstitialInSecoundsEvery = Int(secounds)!
+                self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(ViewController.counterForInterstitialAd), userInfo: nil, repeats: true)
+            }
         }
     }
     
@@ -88,16 +90,16 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func getURL() {
-        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        let urlString = appData?.value(forKey: "URL") as? String
-        
         if let URL = UserDefaults.standard.string(forKey: "URL") {
             self.mainURL = Foundation.URL(string: URL)
         }
         
-        if self.mainURL == nil {
-            if urlString != nil {
-                self.mainURL = URL(string: urlString!)
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if let urlString = appData?.value(forKey: "URL") as? String {
+            if !urlString.isEmpty {
+                if self.mainURL == nil {
+                    self.mainURL = URL(string: urlString)
+                }
             }
         }
     }
@@ -181,9 +183,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         if Defaults[.adsPurchased] == false {
             let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
             if let interstitialId = appData?.value(forKey: "AdMobInterstitialUnitId") as? String {
-                self.interstitial = GADInterstitial(adUnitID: interstitialId)
-                self.interstitial.delegate = self
-                self.interstitial.load(self.request)
+                if !interstitialId.isEmpty {
+                    self.interstitial = GADInterstitial(adUnitID: interstitialId)
+                    self.interstitial.delegate = self
+                    self.interstitial.load(self.request)
+                }
             }
             self.count = self.showInterstitialInSecoundsEvery
         }
@@ -227,18 +231,20 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         if Defaults[.adsPurchased] == false {
             let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
             if let bannerId = appData?.value(forKey: "AdMobBannerUnitId") as? String {
-                let bounds = UIScreen.main.bounds
-                
-                var y:CGFloat = bounds.height - 50
-                if self.toolbar != nil {
-                    y = y - self.toolbar!.frame.height
+                if !bannerId.isEmpty {
+                    let bounds = UIScreen.main.bounds
+                    
+                    var y:CGFloat = bounds.height - 50
+                    if self.toolbar != nil {
+                        y = y - self.toolbar!.frame.height
+                    }
+                    
+                    self.bannerView = GADBannerView(frame: CGRect(x: (bounds.width - 320) / 2, y: y, width: 320, height: 50))
+                    self.bannerView?.adUnitID = bannerId
+                    self.bannerView?.rootViewController = self
+                    self.bannerView?.load(self.request)
+                    self.bannerView?.delegate = self
                 }
-                
-                self.bannerView = GADBannerView(frame: CGRect(x: (bounds.width - 320) / 2, y: y, width: 320, height: 50))
-                self.bannerView?.adUnitID = bannerId
-                self.bannerView?.rootViewController = self
-                self.bannerView?.load(self.request)
-                self.bannerView?.delegate = self
             } else {
                 self.bannerView?.removeFromSuperview()
                 self.wkWebView?.frame = self.getFrame()
@@ -254,8 +260,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             
             let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
             if let urlString = appData?.value(forKey: "URL") as? String {
-                if self.mainURL != URL(string: urlString) {
-                    self.mainURL = URL(string: urlString)
+                if !urlString.isEmpty {
+                    if self.mainURL != URL(string: urlString) {
+                        self.mainURL = URL(string: urlString)
+                    }
                 }
             }
             
@@ -299,12 +307,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func dismissPopViewController(_ domain:String) {
-//        let mainDomain = self.getDomainFromURL(self.mainURL!)
-//        if domain == mainDomain{
-//            if self.popViewController != nil {
-//                self.dismissViewController()
-//            }
-//        }
+        if self.mainURL != nil {
+            let mainDomain = self.getDomainFromURL(self.mainURL!)
+            if domain == mainDomain{
+                if self.popViewController != nil {
+                    self.dismissViewController()
+                }
+            }
+        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
@@ -339,8 +349,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         if let backupURL = appData?.value(forKey: "BackupURL") as? String {
-            let request = URLRequest(url: URL(string: backupURL)!)
-            _ = self.wkWebView?.load(request)
+            if !backupURL.isEmpty {
+                let request = URLRequest(url: URL(string: backupURL)!)
+                _ = self.wkWebView?.load(request)
+            }
         }
     }
     
@@ -552,31 +564,33 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     func removeAdsAction() {
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
-            SwiftyStoreKit.retrieveProductsInfo([productId]) { result in
-                if let product = result.retrievedProducts.first {
-                    let numberFormatter = NumberFormatter()
-                    numberFormatter.locale = product.priceLocale
-                    numberFormatter.numberStyle = .currency
-                    let priceString = numberFormatter.string(from: product.price)
-                    print("Product: \(product.localizedDescription), price: \(priceString)")
-                    
-                    let alert = UIAlertController(title: "In-App Purchase", message: "Do you want to purchase \(product.localizedTitle) for \(priceString!)", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+            if !productId.isEmpty {
+                SwiftyStoreKit.retrieveProductsInfo([productId]) { result in
+                    if let product = result.retrievedProducts.first {
+                        let numberFormatter = NumberFormatter()
+                        numberFormatter.locale = product.priceLocale
+                        numberFormatter.numberStyle = .currency
+                        let priceString = numberFormatter.string(from: product.price)
+                        print("Product: \(product.localizedDescription), price: \(priceString)")
                         
-                    }))
-                    alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { (action: UIAlertAction!) in
-                        self.purchase()
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                    
-                } else {
-                    print("Error: \(result.error)")
-                    
-                    let alert = UIAlertController(title: "In-App Purchase", message: "Product not found", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-
-                    }))
-                    self.present(alert, animated: true, completion: nil)
+                        let alert = UIAlertController(title: "In-App Purchase", message: "Do you want to purchase \(product.localizedTitle) for \(priceString!)", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+                            
+                        }))
+                        alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { (action: UIAlertAction!) in
+                            self.purchase()
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    } else {
+                        print("Error: \(result.error)")
+                        
+                        let alert = UIAlertController(title: "In-App Purchase", message: "Product not found", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                            
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }
@@ -585,55 +599,57 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     func purchase() {
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
-            SwiftyStoreKit.purchaseProduct(productId) { result in
-                switch result {
-                case .success(let productId):
-                    print("Purchase Success: \(productId)")
-                    
-                    Defaults[.adsPurchased] = true
-                    self.timer?.invalidate()
-                    self.timer = nil
-                    
-                    let alert = UIAlertController(title: "In-App Purchase", message: "Purchase successful!", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-                        Defaults[.adsPurchased] = true
+            if !productId.isEmpty {
+                SwiftyStoreKit.purchaseProduct(productId) { result in
+                    switch result {
+                    case .success(let productId):
+                        print("Purchase Success: \(productId)")
                         
+                        Defaults[.adsPurchased] = true
                         self.timer?.invalidate()
                         self.timer = nil
                         
-                        UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                            for view in self.view.subviews {
-                                if view is GADBannerView {
-                                    view.removeFromSuperview()
-                                }
-                            }
-                            self.bannerView = nil
+                        let alert = UIAlertController(title: "In-App Purchase", message: "Purchase successful!", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                            Defaults[.adsPurchased] = true
                             
-                            if self.toolbar != nil {
-                                var buttons = self.toolbar!.items!
-                                for button in self.toolbar!.items! {
-                                    if button == self.iapButton {
-                                        buttons.remove(at: buttons.index(of: button)!)
-                                        self.toolbar?.setItems(buttons, animated: true)
+                            self.timer?.invalidate()
+                            self.timer = nil
+                            
+                            UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                                for view in self.view.subviews {
+                                    if view is GADBannerView {
+                                        view.removeFromSuperview()
                                     }
                                 }
+                                self.bannerView = nil
+                                
+                                if self.toolbar != nil {
+                                    var buttons = self.toolbar!.items!
+                                    for button in self.toolbar!.items! {
+                                        if button == self.iapButton {
+                                            buttons.remove(at: buttons.index(of: button)!)
+                                            self.toolbar?.setItems(buttons, animated: true)
+                                        }
+                                    }
+                                }
+                                
+                                self.wkWebView?.frame = self.getFrame()
+                            }) { (success) in
+                                
                             }
-                            
-                            self.wkWebView?.frame = self.getFrame()
-                        }) { (success) in
-                            
-                        }
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                    
-                case .error(let error):
-                    print("Purchase Failed: \(error)")
-                    
-                    let alert = UIAlertController(title: "In-App Purchase", message: "Purchase Failed", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                        }))
+                        self.present(alert, animated: true, completion: nil)
                         
-                    }))
-                    self.present(alert, animated: true, completion: nil)
+                    case .error(let error):
+                        print("Purchase Failed: \(error)")
+                        
+                        let alert = UIAlertController(title: "In-App Purchase", message: "Purchase Failed", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                            
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }
