@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>URL</key>
-	<string>http://cnn.com</string>
+	<string></string>
 	<key>BackupURL</key>
 	<string>http://bbc.com</string>
 	<key>Toolbar</key>
@@ -13,12 +13,12 @@
 	<key>AdMobInterstitialUnitId</key>
 	<string>ca-app-pub-5514315741534690/5057328761</string>
 	<key>OneSignalAppID</key>
-	<string>ec291a7f-c387-4c06-a37e-34b0b24d97bf</string>
+	<string>f3ae5b2c-d0ed-4df8-ab65-fdb3020ae5aa</string>
 	<key>MixpanelToken</key>
-	<string>02071cb2089de2044c83a80d0d7b29e5</string>
+	<string></string>
 	<key>ShowInterstitialInSecoundsEvery</key>
 	<string>60</string>
 	<key>RemoveAdsPurchaseId</key>
-	<string>cartoongeekremoveads</string>
+	<string>com.brommko.universalwebview.removeads</string>
 </dict>
 </plist>
