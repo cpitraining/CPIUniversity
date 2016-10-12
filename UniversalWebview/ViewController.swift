@@ -546,9 +546,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             items.append(fixedSpaceButton)
             items.append(self.forwardButton!)
             
-            if Defaults[.adsPurchased] == false {
-                items.append(flexibleSpaceButton)
-                items.append(self.iapButton!)
+            if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
+                if !productId.isEmpty {
+                    if Defaults[.adsPurchased] == false {
+                        items.append(flexibleSpaceButton)
+                        items.append(self.iapButton!)
+                    }
+                }
             }
             
             items.append(flexibleSpaceButton)
