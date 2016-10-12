@@ -14,8 +14,6 @@
 	<string>ca-app-pub-5514315741534690/5057328761</string>
 	<key>OneSignalAppID</key>
 	<string>f3ae5b2c-d0ed-4df8-ab65-fdb3020ae5aa</string>
-	<key>MixpanelToken</key>
-	<string></string>
 	<key>ShowInterstitialInSecoundsEvery</key>
 	<string>60</string>
 	<key>RemoveAdsPurchaseId</key>

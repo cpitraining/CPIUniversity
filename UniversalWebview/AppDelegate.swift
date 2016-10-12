@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import FirebaseMessaging
 import FirebaseInstanceID
-import Mixpanel
 import SwiftyUserDefaults
 import SwiftyStoreKit
 
@@ -76,18 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("OneSignal API Key is not in the plist file!")
         }
         
-        if let mixpanelToken = appData?.value(forKey: "MixpanelToken") as? String {
-            if !mixpanelToken.isEmpty {
-                let mixpanel = Mixpanel.sharedInstance(withToken: mixpanelToken)
-                mixpanel.identify(mixpanel.distinctId)
-                print("Mixpanel registered!")
-                
-                Mixpanel.sharedInstance().track("Mixpanel registered", properties: nil)
-            }
-        } else {
-            print("Mixpanel API Key is not in the plist file!")
-        }
-        
         if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
             if !productId.isEmpty {
                 SwiftyStoreKit.completeTransactions() { completedTransactions in
@@ -133,13 +120,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
-        
-        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if let mixpanelToken = appData?.value(forKey: "MixpanelToken") as? String {
-            if !mixpanelToken.isEmpty {
-                Mixpanel.sharedInstance().people.addPushDeviceToken(deviceToken)
-            }
-        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

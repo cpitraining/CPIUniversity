@@ -9,7 +9,6 @@ target 'UniversalWebView' do
     pod 'Firebase/AdMob'
     pod 'Firebase/Messaging'
     pod 'OneSignal'
-    pod 'Mixpanel'
     pod 'SwiftyUserDefaults'
     pod 'SwiftyStoreKit'
     
