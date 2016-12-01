@@ -34,7 +34,7 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.0):
     - GoogleToolboxForMac/Defines (= 2.1.0)
   - MBProgressHUD (1.0.0)
-  - OneSignal (2.2.2)
+  - OneSignal (2.2.1)
   - SwiftyStoreKit (0.5.4)
   - SwiftyUserDefaults (3.0.0)
 
@@ -58,10 +58,10 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  OneSignal: e0b347d6eb671903e0cec630f1b4c1cc446bd874
+  OneSignal: 4fdee33a5c3108c92747be1be8b9b7dfe13f86c5
   SwiftyStoreKit: a8b02a708c6e2bf52207836d58afd3738e2f6670
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
 PODFILE CHECKSUM: 8ceec1e57a7bc08b2e8f8555394fabeeb18c42ee
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.1

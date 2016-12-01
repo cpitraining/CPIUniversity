@@ -578,11 +578,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                         print("Product: \(product.localizedDescription), price: \(priceString)")
                         
                         let alert = UIAlertController(title: "In-App Purchase", message: "Do you want to purchase Remove Ads for \(priceString!)", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
-                            
-                        }))
-                        alert.addAction(UIAlertAction(title: "Buy", style: .default, handler: { (action: UIAlertAction!) in
+                        alert.addAction(UIAlertAction(title: "Remove Ads", style: .default, handler: { (action: UIAlertAction!) in
                             self.purchase()
+                        }))
+                        alert.addAction(UIAlertAction(title: "Restore", style: .default, handler: { (action: UIAlertAction!) in
+                            self.restorePurchases()
+                        }))
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                            
                         }))
                         self.present(alert, animated: true, completion: nil)
                         
@@ -595,6 +598,33 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                         }))
                         self.present(alert, animated: true, completion: nil)
                     }
+                }
+            }
+        }
+    }
+    
+    func restorePurchases() {
+        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+        if let productId = appData?.value(forKey: "RemoveAdsPurchaseId") as? String {
+            SwiftyStoreKit.restorePurchases() { results in
+                if results.restoreFailedProducts.count > 0 {
+                    print("Restore Failed: \(results.restoreFailedProducts)")
+                    let alert = UIAlertController(title: "In-App Purchase", message: "Restore Failed", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else if results.restoredProductIds.count > 0 {
+                    print("Restore Success: \(results.restoredProductIds)")
+                    if results.restoredProductIds.contains(productId) {
+                        self.removeAds()
+                        let alert = UIAlertController(title: "In-App Purchase", message: "Restore successful!", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    print("Nothing to Restore")
+                    let alert = UIAlertController(title: "In-App Purchase", message: "Nothing to Restore", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -615,39 +645,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                         
                         let alert = UIAlertController(title: "In-App Purchase", message: "Purchase successful!", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
-                            Defaults[.adsPurchased] = true
-                            
-                            self.timer?.invalidate()
-                            self.timer = nil
-                            
-                            UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                                for view in self.view.subviews {
-                                    if view is GADBannerView {
-                                        view.removeFromSuperview()
-                                    }
-                                }
-                                self.bannerView = nil
-                                
-                                if self.toolbar != nil {
-                                    var buttons = self.toolbar!.items!
-                                    for button in self.toolbar!.items! {
-                                        if button == self.iapButton {
-                                            buttons.remove(at: buttons.index(of: button)!)
-                                            self.toolbar?.setItems(buttons, animated: true)
-                                        }
-                                    }
-                                }
-                                
-                                self.wkWebView?.frame = self.getFrame()
-                            }) { (success) in
-                                
-                            }
+                            self.removeAds()
                         }))
                         self.present(alert, animated: true, completion: nil)
                         
                     case .error(let error):
                         print("Purchase Failed: \(error)")
-                        
                         let alert = UIAlertController(title: "In-App Purchase", message: "Purchase Failed", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
                             
@@ -677,6 +680,36 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             }
         }
         return domain
+    }
+    
+    func removeAds() {
+        Defaults[.adsPurchased] = true
+        
+        self.timer?.invalidate()
+        self.timer = nil
+        
+        UIView.transition(with: self.view, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            for view in self.view.subviews {
+                if view is GADBannerView {
+                    view.removeFromSuperview()
+                }
+            }
+            self.bannerView = nil
+            
+            if self.toolbar != nil {
+                var buttons = self.toolbar!.items!
+                for button in self.toolbar!.items! {
+                    if button == self.iapButton {
+                        buttons.remove(at: buttons.index(of: button)!)
+                        self.toolbar?.setItems(buttons, animated: true)
+                    }
+                }
+            }
+            
+            self.wkWebView?.frame = self.getFrame()
+        }) { (success) in
+            
+        }
     }
     
     func domains() -> NSArray {
