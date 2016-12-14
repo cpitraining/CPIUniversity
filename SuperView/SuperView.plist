@@ -13,7 +13,7 @@
 	<key>AdMobInterstitialUnitId</key>
 	<string>ca-app-pub-5514315741534690/5057328761</string>
 	<key>OneSignalAppID</key>
-	<string></string>
+	<string>ec291a7f-c387-4c06-a37e-34b0b24d97bf</string>
 	<key>ShowInterstitialInSecoundsEvery</key>
 	<string>60</string>
 	<key>RemoveAdsPurchaseId</key>

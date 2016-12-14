@@ -57,6 +57,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func showLoader() {
         self.load = MBProgressHUD.showAdded(to: self.view, animated: true)
         self.load.mode = MBProgressHUDMode.indeterminate
