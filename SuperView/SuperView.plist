@@ -4,8 +4,6 @@
 <dict>
 	<key>URL</key>
 	<string>http://cnn.com</string>
-	<key>BackupURL</key>
-	<string>http://bbc.com</string>
 	<key>Toolbar</key>
 	<true/>
 	<key>AdMobBannerUnitId</key>

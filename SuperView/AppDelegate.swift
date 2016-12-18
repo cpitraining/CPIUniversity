@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var googlePlistExists = false
     
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -170,7 +169,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let parsedURLString:String? = "\(host)://\(urlString)"
         if parsedURLString != nil {
             UserDefaults.standard.set(parsedURLString, forKey: "URL")
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "RefreshSite"), object: nil)
         }
         
         return true

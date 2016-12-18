@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UniversalWebView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SuperView" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -19,19 +22,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="idm-Xy-jH9"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="idm-Xy-jH9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="v5e-gT-fB5">
+                                <rect key="frame" x="162.5" y="544" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4wc-rX-uuH"/>
+                                    <constraint firstAttribute="width" constant="50" id="d8x-0r-gf3"/>
+                                </constraints>
+                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wJs-wk-0VB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="9O8-z5-obs"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wJs-wk-0VB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1To-QU-D6H"/>
                             <constraint firstItem="idm-Xy-jH9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="DLM-mv-afR"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="idm-Xy-jH9" secondAttribute="bottom" id="OcD-Er-shP"/>
                             <constraint firstItem="idm-Xy-jH9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="Rh2-cA-8tf"/>
+                            <constraint firstAttribute="trailing" secondItem="wJs-wk-0VB" secondAttribute="trailing" id="SnJ-7V-Mtu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="idm-Xy-jH9" secondAttribute="trailing" constant="-16" id="dnA-I7-Kpo"/>
+                            <constraint firstItem="wJs-wk-0VB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fKP-MK-E9s"/>
+                            <constraint firstItem="v5e-gT-fB5" firstAttribute="centerX" secondItem="idm-Xy-jH9" secondAttribute="centerX" id="o5k-OA-frW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="v5e-gT-fB5" secondAttribute="bottom" constant="73" id="q1z-FL-A25"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="b6q-rx-O0O"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="v5e-gT-fB5" id="I0C-tV-31n"/>
                         <outlet property="backgroundImage" destination="idm-Xy-jH9" id="NAH-EE-Y6e"/>
+                        <outlet property="progressBar" destination="wJs-wk-0VB" id="o6v-0k-Q4T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

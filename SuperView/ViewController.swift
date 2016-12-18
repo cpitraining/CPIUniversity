@@ -16,6 +16,8 @@ import SwiftyStoreKit
 class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, MBProgressHUDDelegate, GADBannerViewDelegate, GADInterstitialDelegate  {
     
     @IBOutlet weak var backgroundImage: UIImageView?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var progressBar: UIProgressView!
 
     var bannerView: GADBannerView?
     var toolbar:UIToolbar?
@@ -39,14 +41,15 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.activityIndicator.startAnimating()
+        self.progressBar.progressTintColor = UIColor.green
+
         self.request.testDevices = ["bb394635b98430350b538d1e2ea1e9d6", kGADSimulatorID];
         
         self.loadToolbar()
         self.loadInterstitalAd()
         self.loadBannerAd()
         self.loadWebView()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.loadWebView), name:NSNotification.Name(rawValue: "RefreshSite"), object: nil)
         
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         if let secounds = appData?.value(forKey: "ShowInterstitialInSecoundsEvery") as? String {
@@ -58,12 +61,15 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self)
+        self.wkWebView?.removeObserver(self, forKeyPath: "loading")
+        self.wkWebView?.removeObserver(self, forKeyPath: "estimatedProgress")
     }
     
     func showLoader() {
-        self.load = MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.load.mode = MBProgressHUDMode.indeterminate
+        if self.backgroundImage == nil {
+            self.load = MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.load.mode = MBProgressHUDMode.indeterminate
+        }
     }
     
     func loadToolbar() {
@@ -81,9 +87,17 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func reload() {
-        if let URL = self.wkWebView?.url {
+        if var urlForWebView = self.wkWebView?.url {
+            if urlForWebView.absoluteString.contains("NoInternet.html") {
+                let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
+                if let urlString = appData?.value(forKey: "URL") as? String {
+                    if !urlString.isEmpty {
+                        urlForWebView = URL(string: urlString)!
+                    }
+                }
+            }
             self.showLoader()
-            let request = URLRequest(url: URL)
+            let request = URLRequest(url: urlForWebView)
             _ = self.wkWebView?.load(request)
         }
     }
@@ -109,7 +123,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func loadWebSite() {
-        
         let theConfiguration:WKWebViewConfiguration? = WKWebViewConfiguration()
         let thisPref:WKPreferences = WKPreferences()
         thisPref.javaScriptCanOpenWindowsAutomatically = true;
@@ -118,26 +131,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
 
         self.wkWebView = WKWebView(frame: self.getFrame(), configuration: theConfiguration!)
         if self.mainURL != nil {
-            // Create url request
-            let requestObj: URLRequest?
-            
-            if Reachability.isConnectedToNetwork() {
-                requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 0)
-            } else {
-                requestObj = URLRequest(url: self.mainURL!, cachePolicy: NSURLRequest.CachePolicy.returnCacheDataDontLoad, timeoutInterval: 0)
-            }
-            _ = self.wkWebView?.load(requestObj!)
+            let requestObj = URLRequest(url: self.mainURL!)
+            _ = self.wkWebView?.load(requestObj)
         } else {
             var fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "www/index", ofType: "html")!)
-
             if #available(iOS 9.0, *) {
-                // iOS9 and above. One year later things are OK.
                 _ = self.wkWebView?.loadFileURL(fileURL, allowingReadAccessTo: fileURL)
             } else {
-                // iOS8. Things can (sometimes) be workaround-ed
-                //   Brave people can do just this
-                //   fileURL = try! pathForBuggyWKWebView8(fileURL: fileURL)
-                //   webView.load(URLRequest(url: fileURL))
                 do {
                     fileURL = try fileURLForBuggyWKWebView8(fileURL: fileURL)
                     _ = self.wkWebView?.load(URLRequest(url: fileURL))
@@ -150,6 +150,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         self.wkWebView?.navigationDelegate = self
         self.wkWebView?.uiDelegate = self
         self.wkWebView?.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
+        self.wkWebView?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
     }
     
     func fileURLForBuggyWKWebView8(fileURL: URL) throws -> URL {
@@ -178,8 +179,16 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if (keyPath == "loading") {
+            self.progressBar.layer.zPosition = 1
             self.backButton?.isEnabled = self.wkWebView!.canGoBack
             self.forwardButton?.isEnabled = self.wkWebView!.canGoForward
+        } else if (keyPath == "estimatedProgress") {
+            let estimatedProgress = Float(self.wkWebView!.estimatedProgress)
+            if estimatedProgress > 0.90 {
+                self.didFinish()
+            } else {
+                self.progressBar.progress = estimatedProgress
+            }
         }
     }
 
@@ -257,8 +266,13 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
+        self.didFinish()
+    }
+    
+    func didFinish() {
         self.backgroundImage?.removeFromSuperview()
+        self.backgroundImage = nil
+        self.activityIndicator.stopAnimating()
         
         UIView.transition(with: self.view, duration: 0.1, options: .transitionCrossDissolve, animations: {
             
@@ -276,23 +290,21 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             if self.popViewController == nil {
                 if self.wkWebView != nil {
                     self.view.addSubview(self.wkWebView!)
+                    self.progressBar.layer.zPosition = 1
                     self.interstitialShownForFirstTime = true
                 }
-                
                 if self.toolbar != nil {
                     self.view.addSubview(self.toolbar!)
                 }
-                
                 if self.bannerView != nil {
                     self.view.addSubview(self.bannerView!)
                 }
-                
                 self.showInterstitialAd()
-
             }
             
         }) { (success) in
             self.load.hide(animated: true)
+            self.progressBar.layer.zPosition = 0
         }
     }
     
@@ -341,7 +353,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-
+        self.showLoader()
     }
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
@@ -351,11 +363,15 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
-        if let backupURL = appData?.value(forKey: "BackupURL") as? String {
-            if !backupURL.isEmpty {
-                let request = URLRequest(url: URL(string: backupURL)!)
-                _ = self.wkWebView?.load(request)
+        var fileURL = URL(fileURLWithPath: Bundle.main.path(forResource: "NoInternet", ofType: "html")!)
+        if #available(iOS 9.0, *) {
+            _ = self.wkWebView?.loadFileURL(fileURL, allowingReadAccessTo: fileURL)
+        } else {
+            do {
+                fileURL = try fileURLForBuggyWKWebView8(fileURL: fileURL)
+                _ = self.wkWebView?.load(URLRequest(url: fileURL))
+            } catch let error as NSError {
+                print("Error: " + error.debugDescription)
             }
         }
     }
@@ -470,7 +486,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-
+        self.load.hide(animated: true)
     }
     
     override func didReceiveMemoryWarning() {

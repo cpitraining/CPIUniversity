@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		CD22F7E71DAC1A2D00401E59 /* www in Resources */ = {isa = PBXBuildFile; fileRef = CD22F7E61DAC1A2D00401E59 /* www */; };
+		CD2A1D921E07295800261CDE /* NoInternet.html in Resources */ = {isa = PBXBuildFile; fileRef = CD2A1D911E07295800261CDE /* NoInternet.html */; };
 		CD479A6F1D7DAD160076BFCE /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */; };
 		CD6A99E11D5B1BAA00E25A08 /* SuperView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E01D5B1BAA00E25A08 /* SuperView.plist */; };
 		CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */; };
 		CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */; };
 		CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */; };
 		CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99F51D5B1E3500E25A08 /* Main.storyboard */; };
-		CD7BB3951D7D886800A8C565 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BB3941D7D886800A8C565 /* Reachability.swift */; };
 		CD7BF2EE1DAB893A00212FC2 /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7BF2ED1DAB893A00212FC2 /* DefaultsKeys.swift */; };
 		CD999E1C1D95478F009AF731 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */; };
 		CDBE24E31D800D52007B9363 /* domains.json in Resources */ = {isa = PBXBuildFile; fileRef = CDBE24E21D800D52007B9363 /* domains.json */; };
@@ -26,6 +26,7 @@
 		785471B36607239D8FD446A7 /* Pods-SuperView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SuperView/Pods-SuperView.debug.xcconfig"; sourceTree = "<group>"; };
 		CD22F7E61DAC1A2D00401E59 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		CD27E1DE1D65EFE700EBE817 /* UniversalWebView-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UniversalWebView-Bridging-Header.h"; sourceTree = "<group>"; };
+		CD2A1D911E07295800261CDE /* NoInternet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = NoInternet.html; sourceTree = "<group>"; };
 		CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		CD6A99CB1D5B1B8600E25A08 /* SuperView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6A99E01D5B1BAA00E25A08 /* SuperView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SuperView.plist; path = SuperView/SuperView.plist; sourceTree = "<group>"; };
@@ -34,7 +35,6 @@
 		CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CD6A99F51D5B1E3500E25A08 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		CD7BB3941D7D886800A8C565 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		CD7BF2ED1DAB893A00212FC2 /* DefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		CDBE24E21D800D52007B9363 /* domains.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = domains.json; sourceTree = "<group>"; };
@@ -97,10 +97,10 @@
 				CD22F7E61DAC1A2D00401E59 /* www */,
 				CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */,
 				CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */,
-				CD7BB3941D7D886800A8C565 /* Reachability.swift */,
 				CD7BF2ED1DAB893A00212FC2 /* DefaultsKeys.swift */,
 				CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */,
 				CDBE24E21D800D52007B9363 /* domains.json */,
+				CD2A1D911E07295800261CDE /* NoInternet.html */,
 				CD6A99F51D5B1E3500E25A08 /* Main.storyboard */,
 				CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */,
 				CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */,
@@ -184,6 +184,7 @@
 			files = (
 				CD22F7E71DAC1A2D00401E59 /* www in Resources */,
 				CD999E1C1D95478F009AF731 /* Launch Screen.storyboard in Resources */,
+				CD2A1D921E07295800261CDE /* NoInternet.html in Resources */,
 				CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */,
 				CDBE24E31D800D52007B9363 /* domains.json in Resources */,
 				CD6A99E11D5B1BAA00E25A08 /* SuperView.plist in Resources */,
@@ -249,7 +250,6 @@
 				CD7BF2EE1DAB893A00212FC2 /* DefaultsKeys.swift in Sources */,
 				CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */,
 				CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */,
-				CD7BB3951D7D886800A8C565 /* Reachability.swift in Sources */,
 				CD479A6F1D7DAD160076BFCE /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
