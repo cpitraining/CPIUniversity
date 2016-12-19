@@ -60,11 +60,6 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        self.wkWebView?.removeObserver(self, forKeyPath: "loading")
-        self.wkWebView?.removeObserver(self, forKeyPath: "estimatedProgress")
-    }
-    
     func showLoader() {
         if self.backgroundImage == nil {
             self.load = MBProgressHUD.showAdded(to: self.view, animated: true)
