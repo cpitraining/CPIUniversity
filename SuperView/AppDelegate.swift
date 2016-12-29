@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if !productId.isEmpty {
                 SwiftyStoreKit.completeTransactions() { completedTransactions in
                     for completedTransaction in completedTransactions {
-                        if completedTransaction.transactionState == .purchased || completedTransaction.transactionState == .restored {
+                        if completedTransaction.transaction.transactionState == .purchased || completedTransaction.transaction.transactionState == .restored {
                             print("purchased: \(completedTransaction.productId)")
                             
                             if completedTransaction.productId == productId {

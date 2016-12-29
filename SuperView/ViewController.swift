@@ -627,13 +627,17 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
                     let alert = UIAlertController(title: "In-App Purchase", message: "Restore Failed", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
-                } else if results.restoredProductIds.count > 0 {
-                    print("Restore Success: \(results.restoredProductIds)")
-                    if results.restoredProductIds.contains(productId) {
-                        self.removeAds()
-                        let alert = UIAlertController(title: "In-App Purchase", message: "Restore successful!", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                } else if results.restoredProducts.count > 0 {
+                    print("Restore Success: \(results.restoredProducts)")
+                    
+                    for restoredProduct in results.restoredProducts{
+                        if restoredProduct.productId == productId {
+                            self.removeAds()
+                            let alert = UIAlertController(title: "In-App Purchase", message: "Restore successful!", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            break
+                        }
                     }
                 } else {
                     print("Nothing to Restore")
