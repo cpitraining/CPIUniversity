@@ -14,7 +14,7 @@ import SwiftyUserDefaults
 import SwiftyStoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
     
     var window: UIWindow?
     
@@ -32,31 +32,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             googlePlistExists = true
         }
         
-        if #available(iOS 10, *) {
-            //Notifications get posted to the function (delegate):  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: () -> Void)"
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-                guard error == nil else {
-                    //Display Error.. Handle Error.. etc..
-                    return
-                }
-                
-                if granted {
-                    //Do stuff here..
-                } else {
-                    //Handle user denying permissions..
-                }
+        if #available(iOS 10.0, *) {
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization( options: authOptions, completionHandler: {_, _ in })
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            if googlePlistExists == true {
+                // For iOS 10 data message (sent via FCM)
+                FIRMessaging.messaging().remoteMessageDelegate = self
             }
         } else {
-            let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
         }
+        application.registerForRemoteNotifications()
         
         if googlePlistExists == true {
-            
             FIRApp.configure()
-            
-            // Add observer for InstanceID token refresh callback.
             NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.tokenRefreshNotification), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         }
         
@@ -91,6 +85,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         return true
+    }
+    
+    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+        
     }
     
     func tokenRefreshNotification(_ notification: Notification) {
