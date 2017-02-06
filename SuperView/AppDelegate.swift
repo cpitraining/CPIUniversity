@@ -43,13 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 FIRMessaging.messaging().remoteMessageDelegate = self
             }
         } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-        application.registerForRemoteNotifications()
         
         if googlePlistExists == true {
+            application.registerForRemoteNotifications()
             FIRApp.configure()
             NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.tokenRefreshNotification), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         }
@@ -57,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let appData = NSDictionary(contentsOfFile: AppDelegate.dataPath())
         if let oneSignalAppID = appData?.value(forKey: "OneSignalAppID") as? String {
             if !oneSignalAppID.isEmpty {
+                application.registerForRemoteNotifications()
                 OneSignal.initWithLaunchOptions(launchOptions, appId: oneSignalAppID, handleNotificationAction: nil, settings:
                     [kOSSettingsKeyInAppAlerts: false,
                      kOSSettingsKeyAutoPrompt: false,
