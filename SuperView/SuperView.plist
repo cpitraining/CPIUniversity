@@ -3,18 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>URL</key>
-	<string>http://cnn.com</string>
+	<string>https://cpiu2.torchlms.com</string>
 	<key>Toolbar</key>
 	<true/>
-	<key>AdMobBannerUnitId</key>
-	<string></string>
-	<key>AdMobInterstitialUnitId</key>
-	<string></string>
 	<key>OneSignalAppID</key>
-	<string></string>
-	<key>ShowInterstitialInSecoundsEvery</key>
-	<string>60</string>
-	<key>RemoveAdsPurchaseId</key>
-	<string>com.brommko.universalwebview.removeads</string>
+	<string>2ba4f1bb-ad5b-4c83-94c3-0ab0bcd8f2ea</string>
 </dict>
 </plist>

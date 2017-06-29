@@ -1,4 +1,10 @@
 PODS:
+  - Branch (0.13.5):
+    - Branch/Core (= 0.13.5)
+    - Branch/without-IDFA (= 0.13.5)
+  - Branch/Core (0.13.5)
+  - Branch/without-IDFA (0.13.5)
+  - Fabric (1.6.11)
   - Firebase/AdMob (3.11.0):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (= 7.16.0)
@@ -39,6 +45,8 @@ PODS:
   - SwiftyUserDefaults (3.0.0)
 
 DEPENDENCIES:
+  - Branch
+  - Fabric
   - Firebase/AdMob
   - Firebase/Core
   - Firebase/Messaging
@@ -48,6 +56,8 @@ DEPENDENCIES:
   - SwiftyUserDefaults
 
 SPEC CHECKSUMS:
+  Branch: 08e40d84f20b188443fd808fe01dadcc13d1727e
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Firebase: b8134e285eb33201115bc688bc5d7f112923bc1f
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
   FirebaseCore: 03da1cb32615569bbc2830a22f9ad753d9a02ef5
@@ -62,6 +72,6 @@ SPEC CHECKSUMS:
   SwiftyStoreKit: 956408606f43ec3df3386b56e65615bb19bee85e
   SwiftyUserDefaults: 0f1d45fc3aafb9064dac661e367f8f83fe21a4b4
 
-PODFILE CHECKSUM: 7a03bbca85fc3b22bf8cdd00932a24d133d80d45
+PODFILE CHECKSUM: c8d590a1ccb96eeb2fb6a1e09592a18f50decaaa
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

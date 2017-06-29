@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C69995C1F054CAF0054D336 /* DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C69995B1F054CAF0054D336 /* DeepLinking.swift */; };
+		4CEF6D7C1F05431B00CD6332 /* Images-3.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CEF6D7B1F05431B00CD6332 /* Images-3.xcassets */; };
 		CD22F7E71DAC1A2D00401E59 /* www in Resources */ = {isa = PBXBuildFile; fileRef = CD22F7E61DAC1A2D00401E59 /* www */; };
 		CD2A1D921E07295800261CDE /* NoInternet.html in Resources */ = {isa = PBXBuildFile; fileRef = CD2A1D911E07295800261CDE /* NoInternet.html */; };
 		CD479A6F1D7DAD160076BFCE /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */; };
 		CD6A99E11D5B1BAA00E25A08 /* SuperView.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E01D5B1BAA00E25A08 /* SuperView.plist */; };
-		CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */; };
 		CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */; };
 		CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */; };
 		CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD6A99F51D5B1E3500E25A08 /* Main.storyboard */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C69995B1F054CAF0054D336 /* DeepLinking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinking.swift; sourceTree = "<group>"; };
+		4CEF6D7B1F05431B00CD6332 /* Images-3.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-3.xcassets"; sourceTree = "<group>"; };
 		6FB41A02A45CA3294D09AF1A /* Pods-SuperView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperView.release.xcconfig"; path = "Pods/Target Support Files/Pods-SuperView/Pods-SuperView.release.xcconfig"; sourceTree = "<group>"; };
 		785471B36607239D8FD446A7 /* Pods-SuperView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SuperView/Pods-SuperView.debug.xcconfig"; sourceTree = "<group>"; };
 		CD22F7E61DAC1A2D00401E59 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
@@ -30,7 +33,6 @@
 		CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		CD6A99CB1D5B1B8600E25A08 /* SuperView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6A99E01D5B1BAA00E25A08 /* SuperView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SuperView.plist; path = SuperView/SuperView.plist; sourceTree = "<group>"; };
-		CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CD6A99EB1D5B1C1800E25A08 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,15 +99,16 @@
 				CD22F7E61DAC1A2D00401E59 /* www */,
 				CD6A99ED1D5B1CE100E25A08 /* AppDelegate.swift */,
 				CD6A99EE1D5B1CE100E25A08 /* ViewController.swift */,
+				4C69995B1F054CAF0054D336 /* DeepLinking.swift */,
 				CD7BF2ED1DAB893A00212FC2 /* DefaultsKeys.swift */,
 				CD479A6E1D7DAD160076BFCE /* UIColorExtension.swift */,
 				CDBE24E21D800D52007B9363 /* domains.json */,
 				CD2A1D911E07295800261CDE /* NoInternet.html */,
 				CD6A99F51D5B1E3500E25A08 /* Main.storyboard */,
 				CD999E1B1D95478F009AF731 /* Launch Screen.storyboard */,
-				CD6A99E91D5B1BFA00E25A08 /* Images.xcassets */,
 				CD6A99EB1D5B1C1800E25A08 /* Info.plist */,
 				CD27E1DE1D65EFE700EBE817 /* UniversalWebView-Bridging-Header.h */,
+				4CEF6D7B1F05431B00CD6332 /* Images-3.xcassets */,
 			);
 			path = SuperView;
 			sourceTree = "<group>";
@@ -123,6 +126,7 @@
 				CD6A99C91D5B1B8600E25A08 /* Resources */,
 				DB65B082F3B06527E81C52ED /* [CP] Embed Pods Frameworks */,
 				EB6C43668B1D0879C7DAE97C /* [CP] Copy Pods Resources */,
+				4C69995D1F054FCA0054D336 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -145,7 +149,7 @@
 				TargetAttributes = {
 					CD6A99CA1D5B1B8600E25A08 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 56XX2LQCB2;
+						DevelopmentTeam = AT3759572L;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -183,9 +187,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD22F7E71DAC1A2D00401E59 /* www in Resources */,
+				4CEF6D7C1F05431B00CD6332 /* Images-3.xcassets in Resources */,
 				CD999E1C1D95478F009AF731 /* Launch Screen.storyboard in Resources */,
 				CD2A1D921E07295800261CDE /* NoInternet.html in Resources */,
-				CD6A99EA1D5B1BFA00E25A08 /* Images.xcassets in Resources */,
 				CDBE24E31D800D52007B9363 /* domains.json in Resources */,
 				CD6A99E11D5B1BAA00E25A08 /* SuperView.plist in Resources */,
 				CD6A99F61D5B1E3500E25A08 /* Main.storyboard in Resources */,
@@ -209,6 +213,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		4C69995D1F054FCA0054D336 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9751845f8887e7fbe4d9676639c55ca7df6f29e3 5447388e13ad8fc41efc4ce8af99ab60e8c4ef3991a0b5ce456746ecaaa0dcea";
 		};
 		DB65B082F3B06527E81C52ED /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -251,6 +268,7 @@
 				CD6A99EF1D5B1CE100E25A08 /* AppDelegate.swift in Sources */,
 				CD6A99F01D5B1CE100E25A08 /* ViewController.swift in Sources */,
 				CD479A6F1D7DAD160076BFCE /* UIColorExtension.swift in Sources */,
+				4C69995C1F054CAF0054D336 /* DeepLinking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,11 +374,11 @@
 				CODE_SIGN_ENTITLEMENTS = SuperView/SuperView.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 56XX2LQCB2;
+				DEVELOPMENT_TEAM = AT3759572L;
 				INFOPLIST_FILE = "$(SRCROOT)/SuperView/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bommko.UniversalWebView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cpisecurity.cpiuniversity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SuperView/UniversalWebView-Bridging-Header.h";
@@ -377,11 +395,11 @@
 				CODE_SIGN_ENTITLEMENTS = SuperView/SuperView.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 56XX2LQCB2;
+				DEVELOPMENT_TEAM = AT3759572L;
 				INFOPLIST_FILE = "$(SRCROOT)/SuperView/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bommko.UniversalWebView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cpisecurity.cpiuniversity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SuperView/UniversalWebView-Bridging-Header.h";

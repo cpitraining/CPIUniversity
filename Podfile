@@ -11,6 +11,8 @@ target 'SuperView' do
     pod 'OneSignal'
     pod 'SwiftyUserDefaults'
     pod 'SwiftyStoreKit'
+    pod 'Fabric'
+    pod 'Branch'
 
 end
 

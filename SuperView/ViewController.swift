@@ -439,7 +439,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             print("domains: \(domain)")
             print("navigationType: LinkActivated")
             
-            self.dismissPopViewController(domain)
+           // self.dismissPopViewController(domain)
             decisionHandler(WKNavigationActionPolicy.allow)
         } else if (navigationAction.navigationType == WKNavigationType.backForward) {
             print("navigationType: BackForward")
@@ -455,7 +455,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
             print("navigationType: Reload")
             decisionHandler(WKNavigationActionPolicy.allow)
         } else {
-            self.dismissPopViewController(domain)
+          //  self.dismissPopViewController(domain)
             decisionHandler(WKNavigationActionPolicy.allow)
         }
     }
